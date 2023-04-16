@@ -1,0 +1,60 @@
+{
+  "applications": "*",
+  "changelogDate": "20230416123418",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "terjem_theque",
+  "fields": [
+    {
+      "fieldName": "lienDownload",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "formatDocTraduit",
+      "fieldType": "FormatDocTraduit",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "PDF,PNG,JPEG"
+    },
+    {
+      "fieldName": "nomFichier",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "150"
+    },
+    {
+      "fieldName": "docTraduit",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "dateCreation",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "etat",
+      "fieldType": "Long"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "TerjemTheque",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "prestataire",
+      "otherEntityRelationshipName": "terjemTheque",
+      "relationshipName": "prestataire",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "demandeur",
+      "otherEntityRelationshipName": "terjemTheque",
+      "relationshipName": "demandeur",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

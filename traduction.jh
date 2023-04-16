@@ -1,0 +1,194 @@
+
+entity Demandeur {
+  civilite Civilite, 
+  nom String required maxlength(80),
+  prenom String required maxlength(80),
+  dateDeNaissance LocalDate,
+  telephone String required maxlength(30)  ,  
+  email String required pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}/) maxlength(50),
+  adresse String maxlength(50),
+  dateCreation LocalDate,
+  etat EtatDemandeur
+}
+
+entity DemandeDeTraduction {
+  modeEnvoiPreconise ModeEnvoi,
+  modeLivraisonExige ModeLivraison,
+  delaiDeTraitemenSouhaite Integer,
+  adresseLivraison String	maxlength(150),
+  delaiDeTraitemenPrestataire Integer,
+  observation String  maxlength(500), 
+  dateCreation LocalDate,
+  dateCloture LocalDate,
+  etat EtatDemande        
+}
+
+entity DocumentATraduire {
+  nombreDePagesATraduire Integer required,
+  mentionTraitementParticulier String  maxlength(500), 
+  remarques String  maxlength(500)  
+}
+
+entity Devis {
+	numero String minlength(2) maxlength(30) required,
+	date LocalDate required,
+	prixTotal BigDecimal required,
+    etat Long required 
+}
+entity DetailDevis {
+	qte Long required,
+    prixUnitaire BigDecimal required,
+	prixTotal BigDecimal required,
+    etat Long required 
+}
+
+entity NatureDocumentATraduire {
+  codeType String,
+  typeDocument String,
+         
+}
+
+entity Langue {
+	codeLangue String,
+	nomLangue String
+}
+
+
+entity Prestataire{
+  civilite Civilite, 
+  nom String required maxlength(80),
+  prenom String required maxlength(80),
+  nomCommercial String  maxlength(80),
+  telephoneTravail String  maxlength(30) ,   
+  telephoneMobile String required maxlength(30) ,   
+  email String required pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}/) maxlength(50) , 
+  adresse String maxlength(70),
+  codePostal String maxlength(10),
+  photoDeProfil  Blob,
+  numeroPieceIdentite String required maxlength(50),
+  typeIdentiteProfessionnelle TypeIdentiteProfessionnelle,
+  rattachIdentitePro Blob ,
+  coordonneesBancaires Blob ,
+  titulaireDuCompte String  maxlength(80),
+  ribOuRip String maxlength(20),
+  dateCreation LocalDate,
+  etat EtatPrestataire    
+}
+
+
+entity Notation{
+  notetation Integer required,	
+  commentaire String  maxlength(150),
+  dateCreation LocalDate  
+}
+
+entity PieceJointe{
+  nomFichier String required maxlength(150),
+  chemin String required maxlength(500) ,
+  urlPiece String required maxlength(500) ,
+  description String,
+  codePiece String,
+  libellePiece String,
+  rattachPj Blob,
+  dateCreation LocalDate  
+}
+ 
+entity TerjemTheque{
+    lienDownload String required maxlength(500) ,
+	formatDocTraduit FormatDocTraduit required,
+	 nomFichier String required maxlength(150),
+    docTraduit Blob,
+	dateCreation LocalDate,
+	etat Long   	
+}
+entity Banque {
+  code String required,
+  libelle String required
+}
+entity AgenceBanque {
+	code String required,
+  libelle String required
+}
+
+entity Ville {
+	nom String
+}
+
+entity Commentaire {
+	texte String
+}
+
+enum TypeIdentiteProfessionnelle {
+	MATRIULEFISCAL, CARTEPROFESSIONNEL 
+}
+
+
+enum FormatDocTraduit {
+	PDF, PNG, JPEG 
+}
+
+enum Civilite {
+	Madame, Monsieur, Mademoiselle 
+}
+
+enum EtatDemandeur {
+	Actif, Inactif, Bani, Suspendu, Revoque
+}
+enum EtatPrestataire {
+	Actif, Inactif
+}
+
+enum EtatDemande {
+	Initiee, Devis, DevisAccepte, DevisRejete, Payee, EncoursTratitement, Annulee, Close
+}
+
+enum ModeEnvoi{
+COURRIERPOSTAL, EMAIL
+}
+enum ModeLivraison {
+COURRIERPOSTAL, EMAIL, REMISEENMAINSPROPRES
+}
+
+relationship OneToOne {
+  Demandeur {user(login)} to User,
+  Prestataire {user(login)} to User
+}
+
+relationship OneToMany {
+  Demandeur{demandes}  to DemandeDeTraduction{demandeurService(nom)},
+  DemandeDeTraduction{traductions}  to DocumentATraduire{demandeTraductions(delaiDeTraitemenSouhaite)},
+  DocumentATraduire{documens} to Langue {docTraductions(nombreDePagesATraduire)},
+  DemandeDeTraduction{traductionsPj}  to PieceJointe{pjDdeTraductions(delaiDeTraitemenSouhaite)},
+  DemandeDeTraduction{traductionsPresta} to Prestataire {prestaDdeTraductions(delaiDeTraitemenSouhaite)},
+  Prestataire to PieceJointe,
+  Prestataire to Devis,
+  DemandeDeTraduction to Devis,
+  Devis to DetailDevis,
+  DemandeDeTraduction to Commentaire ,
+  Prestataire to Commentaire,
+  Demandeur to Commentaire,
+  Prestataire to TerjemTheque,
+  Demandeur to TerjemTheque,
+  Banque to AgenceBanque  ,
+  AgenceBanque to Demandeur,
+  AgenceBanque to Prestataire,
+  Demandeur to Notation,
+  Prestataire to Notation
+  
+}
+relationship ManyToOne {  
+
+  DemandeDeTraduction{ville(nom)} to Ville ,
+  Demandeur  {ville(nom)} to Ville ,
+  Demandeur {banque(libelle)} to Banque,
+  Prestataire {banque(libelle)} to Banque,
+  Prestataire  {ville(nom)} to Ville ,
+  DocumentATraduire  {langueDestination(nomLangue)} to Langue,
+  DocumentATraduire  {typeDocument(typeDocument)} to NatureDocumentATraduire
+
+}
+// Set pagination options
+paginate * with pagination
+service * with serviceClass except User
+// Set an angular suffix
+// angularSuffix * with sadiki

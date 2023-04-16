@@ -1,0 +1,198 @@
+<div>
+  <h2 id="page-heading" data-cy="DemandeDeTraductionHeading">
+    <span jhiTranslate="jhipsterSampleApplicationApp.demandeDeTraduction.home.title">DemandeDeTraductions</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="jhipsterSampleApplicationApp.demandeDeTraduction.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-demande-de-traduction"
+        [routerLink]="['/demande-de-traduction/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="jhipsterSampleApplicationApp.demandeDeTraduction.home.createLabel">
+          Créer un nouveau Demande De Traduction
+        </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="demandeDeTraductions?.length === 0">
+    <span jhiTranslate="jhipsterSampleApplicationApp.demandeDeTraduction.home.notFound">Aucun Demande De Traduction trouvé</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="demandeDeTraductions && demandeDeTraductions.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="modeEnvoiPreconise">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.demandeDeTraduction.modeEnvoiPreconise">Mode Envoi Preconise</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="modeLivraisonExige">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.demandeDeTraduction.modeLivraisonExige">Mode Livraison Exige</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="delaiDeTraitemenSouhaite">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.demandeDeTraduction.delaiDeTraitemenSouhaite"
+                >Delai De Traitemen Souhaite</span
+              >
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="adresseLivraison">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.demandeDeTraduction.adresseLivraison">Adresse Livraison</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="delaiDeTraitemenPrestataire">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.demandeDeTraduction.delaiDeTraitemenPrestataire"
+                >Delai De Traitemen Prestataire</span
+              >
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="observation">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.demandeDeTraduction.observation">Observation</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="dateCreation">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.demandeDeTraduction.dateCreation">Date Creation</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="dateCloture">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.demandeDeTraduction.dateCloture">Date Cloture</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="etat">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.demandeDeTraduction.etat">Etat</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="ville.nom">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.demandeDeTraduction.ville">Ville</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="demandeurService.nom">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.demandeDeTraduction.demandeurService">Demandeur Service</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let demandeDeTraduction of demandeDeTraductions; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/demande-de-traduction', demandeDeTraduction.id, 'view']">{{ demandeDeTraduction.id }}</a>
+          </td>
+          <td jhiTranslate="{{ 'jhipsterSampleApplicationApp.ModeEnvoi.' + demandeDeTraduction.modeEnvoiPreconise }}">
+            {{ demandeDeTraduction.modeEnvoiPreconise }}
+          </td>
+          <td jhiTranslate="{{ 'jhipsterSampleApplicationApp.ModeLivraison.' + demandeDeTraduction.modeLivraisonExige }}">
+            {{ demandeDeTraduction.modeLivraisonExige }}
+          </td>
+          <td>{{ demandeDeTraduction.delaiDeTraitemenSouhaite }}</td>
+          <td>{{ demandeDeTraduction.adresseLivraison }}</td>
+          <td>{{ demandeDeTraduction.delaiDeTraitemenPrestataire }}</td>
+          <td>{{ demandeDeTraduction.observation }}</td>
+          <td>{{ demandeDeTraduction.dateCreation | formatMediumDate }}</td>
+          <td>{{ demandeDeTraduction.dateCloture | formatMediumDate }}</td>
+          <td jhiTranslate="{{ 'jhipsterSampleApplicationApp.EtatDemande.' + demandeDeTraduction.etat }}">
+            {{ demandeDeTraduction.etat }}
+          </td>
+          <td>
+            <div *ngIf="demandeDeTraduction.ville">
+              <a [routerLink]="['/ville', demandeDeTraduction.ville.id, 'view']">{{ demandeDeTraduction.ville.nom }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="demandeDeTraduction.demandeurService">
+              <a [routerLink]="['/demandeur', demandeDeTraduction.demandeurService.id, 'view']">{{
+                demandeDeTraduction.demandeurService.nom
+              }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/demande-de-traduction', demandeDeTraduction.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/demande-de-traduction', demandeDeTraduction.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+              </button>
+
+              <button type="submit" (click)="delete(demandeDeTraduction)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="demandeDeTraductions && demandeDeTraductions.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

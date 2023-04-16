@@ -1,0 +1,43 @@
+{
+  "applications": "*",
+  "changelogDate": "20230416123412",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "detail_devis",
+  "fields": [
+    {
+      "fieldName": "qte",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "prixUnitaire",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "prixTotal",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "etat",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "DetailDevis",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "devis",
+      "otherEntityRelationshipName": "detailDevis",
+      "relationshipName": "devis",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

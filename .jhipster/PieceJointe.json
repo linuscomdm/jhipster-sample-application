@@ -1,0 +1,69 @@
+{
+  "applications": "*",
+  "changelogDate": "20230416123417",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "piece_jointe",
+  "fields": [
+    {
+      "fieldName": "nomFichier",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "150"
+    },
+    {
+      "fieldName": "chemin",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "urlPiece",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "codePiece",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "libellePiece",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "rattachPj",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "dateCreation",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "PieceJointe",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "delaiDeTraitemenSouhaite",
+      "otherEntityName": "demandeDeTraduction",
+      "otherEntityRelationshipName": "traductionsPj",
+      "relationshipName": "pjDdeTraductions",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "prestataire",
+      "otherEntityRelationshipName": "pieceJointe",
+      "relationshipName": "prestataire",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

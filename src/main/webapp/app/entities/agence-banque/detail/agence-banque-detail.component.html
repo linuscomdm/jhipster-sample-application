@@ -1,0 +1,44 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="agenceBanque">
+      <h2 data-cy="agenceBanqueDetailsHeading">
+        <span jhiTranslate="jhipsterSampleApplicationApp.agenceBanque.detail.title">Agence Banque</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ agenceBanque.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.agenceBanque.code">Code</span></dt>
+        <dd>
+          <span>{{ agenceBanque.code }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.agenceBanque.libelle">Libelle</span></dt>
+        <dd>
+          <span>{{ agenceBanque.libelle }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.agenceBanque.banque">Banque</span></dt>
+        <dd>
+          <div *ngIf="agenceBanque.banque">
+            <a [routerLink]="['/banque', agenceBanque.banque.id, 'view']">{{ agenceBanque.banque.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/agence-banque', agenceBanque.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+      </button>
+    </div>
+  </div>
+</div>

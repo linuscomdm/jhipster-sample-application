@@ -1,0 +1,244 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-terjem-theque-heading"
+        data-cy="TerjemThequeCreateUpdateHeading"
+        jhiTranslate="jhipsterSampleApplicationApp.terjemTheque.home.createOrEditLabel"
+      >
+        Créer ou éditer un Terjem Theque
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.terjemTheque.lienDownload" for="field_lienDownload"
+            >Lien Download</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="lienDownload"
+            id="field_lienDownload"
+            data-cy="lienDownload"
+            formControlName="lienDownload"
+          />
+          <div
+            *ngIf="editForm.get('lienDownload')!.invalid && (editForm.get('lienDownload')!.dirty || editForm.get('lienDownload')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('lienDownload')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              Ce champ est obligatoire.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('lienDownload')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 500 }"
+            >
+              Ce champ doit faire moins de 500 caractères.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.terjemTheque.formatDocTraduit" for="field_formatDocTraduit"
+            >Format Doc Traduit</label
+          >
+          <select
+            class="form-control"
+            name="formatDocTraduit"
+            formControlName="formatDocTraduit"
+            id="field_formatDocTraduit"
+            data-cy="formatDocTraduit"
+          >
+            <option [ngValue]="null">{{ 'jhipsterSampleApplicationApp.FormatDocTraduit.null' | translate }}</option>
+            <option *ngFor="let formatDocTraduit of formatDocTraduitValues" [value]="formatDocTraduit">
+              {{ 'jhipsterSampleApplicationApp.FormatDocTraduit.' + formatDocTraduit | translate }}
+            </option>
+          </select>
+          <div
+            *ngIf="
+              editForm.get('formatDocTraduit')!.invalid &&
+              (editForm.get('formatDocTraduit')!.dirty || editForm.get('formatDocTraduit')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('formatDocTraduit')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              Ce champ est obligatoire.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.terjemTheque.nomFichier" for="field_nomFichier"
+            >Nom Fichier</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="nomFichier"
+            id="field_nomFichier"
+            data-cy="nomFichier"
+            formControlName="nomFichier"
+          />
+          <div *ngIf="editForm.get('nomFichier')!.invalid && (editForm.get('nomFichier')!.dirty || editForm.get('nomFichier')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('nomFichier')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              Ce champ est obligatoire.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('nomFichier')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 150 }"
+            >
+              Ce champ doit faire moins de 150 caractères.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.terjemTheque.docTraduit" for="field_docTraduit"
+            >Doc Traduit</label
+          >
+          <div>
+            <div *ngIf="editForm.get('docTraduit')!.value" class="form-text text-danger clearfix">
+              <a
+                class="pull-start"
+                (click)="openFile(editForm.get('docTraduit')!.value!, editForm.get('docTraduitContentType')!.value!)"
+                jhiTranslate="entity.action.open"
+                >Ouvrir</a
+              ><br />
+              <span class="pull-start"
+                >{{ editForm.get('docTraduitContentType')!.value }}, {{ byteSize(editForm.get('docTraduit')!.value!) }}</span
+              >
+              <button
+                type="button"
+                (click)="editForm.patchValue({ docTraduit: undefined, docTraduitContentType: undefined })"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_docTraduit"
+              data-cy="docTraduit"
+              (change)="setFileData($event, 'docTraduit', false)"
+              jhiTranslate="entity.action.addblob"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="docTraduit"
+            id="field_docTraduit"
+            data-cy="docTraduit"
+            formControlName="docTraduit"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="docTraduitContentType"
+            id="field_docTraduitContentType"
+            formControlName="docTraduitContentType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.terjemTheque.dateCreation" for="field_dateCreation"
+            >Date Creation</label
+          >
+          <div class="input-group">
+            <input
+              id="field_dateCreation"
+              data-cy="dateCreation"
+              type="text"
+              class="form-control"
+              name="dateCreation"
+              ngbDatepicker
+              #dateCreationDp="ngbDatepicker"
+              formControlName="dateCreation"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateCreationDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.terjemTheque.etat" for="field_etat">Etat</label>
+          <input type="number" class="form-control" name="etat" id="field_etat" data-cy="etat" formControlName="etat" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.terjemTheque.prestataire" for="field_prestataire"
+            >Prestataire</label
+          >
+          <select
+            class="form-control"
+            id="field_prestataire"
+            data-cy="prestataire"
+            name="prestataire"
+            formControlName="prestataire"
+            [compareWith]="comparePrestataire"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="prestataireOption" *ngFor="let prestataireOption of prestatairesSharedCollection">
+              {{ prestataireOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.terjemTheque.demandeur" for="field_demandeur"
+            >Demandeur</label
+          >
+          <select
+            class="form-control"
+            id="field_demandeur"
+            data-cy="demandeur"
+            name="demandeur"
+            formControlName="demandeur"
+            [compareWith]="compareDemandeur"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="demandeurOption" *ngFor="let demandeurOption of demandeursSharedCollection">{{ demandeurOption.id }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

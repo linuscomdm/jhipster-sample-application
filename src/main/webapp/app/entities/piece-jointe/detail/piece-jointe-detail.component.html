@@ -1,0 +1,79 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="pieceJointe">
+      <h2 data-cy="pieceJointeDetailsHeading">
+        <span jhiTranslate="jhipsterSampleApplicationApp.pieceJointe.detail.title">Piece Jointe</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ pieceJointe.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.pieceJointe.nomFichier">Nom Fichier</span></dt>
+        <dd>
+          <span>{{ pieceJointe.nomFichier }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.pieceJointe.chemin">Chemin</span></dt>
+        <dd>
+          <span>{{ pieceJointe.chemin }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.pieceJointe.urlPiece">Url Piece</span></dt>
+        <dd>
+          <span>{{ pieceJointe.urlPiece }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.pieceJointe.description">Description</span></dt>
+        <dd>
+          <span>{{ pieceJointe.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.pieceJointe.codePiece">Code Piece</span></dt>
+        <dd>
+          <span>{{ pieceJointe.codePiece }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.pieceJointe.libellePiece">Libelle Piece</span></dt>
+        <dd>
+          <span>{{ pieceJointe.libellePiece }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.pieceJointe.rattachPj">Rattach Pj</span></dt>
+        <dd>
+          <div *ngIf="pieceJointe.rattachPj">
+            <a (click)="openFile(pieceJointe.rattachPj, pieceJointe.rattachPjContentType)" jhiTranslate="entity.action.open">Ouvrir</a>
+            {{ pieceJointe.rattachPjContentType }}, {{ byteSize(pieceJointe.rattachPj) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.pieceJointe.dateCreation">Date Creation</span></dt>
+        <dd>
+          <span>{{ pieceJointe.dateCreation | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.pieceJointe.pjDdeTraductions">Pj Dde Traductions</span></dt>
+        <dd>
+          <div *ngIf="pieceJointe.pjDdeTraductions">
+            <a [routerLink]="['/demande-de-traduction', pieceJointe.pjDdeTraductions.id, 'view']">{{
+              pieceJointe.pjDdeTraductions.delaiDeTraitemenSouhaite
+            }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.pieceJointe.prestataire">Prestataire</span></dt>
+        <dd>
+          <div *ngIf="pieceJointe.prestataire">
+            <a [routerLink]="['/prestataire', pieceJointe.prestataire.id, 'view']">{{ pieceJointe.prestataire.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/piece-jointe', pieceJointe.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+      </button>
+    </div>
+  </div>
+</div>

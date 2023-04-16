@@ -1,0 +1,115 @@
+{
+  "applications": "*",
+  "changelogDate": "20230416123408",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "demandeur",
+  "fields": [
+    {
+      "fieldName": "civilite",
+      "fieldType": "Civilite",
+      "fieldValues": "Madame,Monsieur,Mademoiselle"
+    },
+    {
+      "fieldName": "nom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "80"
+    },
+    {
+      "fieldName": "prenom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "80"
+    },
+    {
+      "fieldName": "dateDeNaissance",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "telephone",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "30"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "pattern", "maxlength"],
+      "fieldValidateRulesMaxlength": "50",
+      "fieldValidateRulesPattern": "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}"
+    },
+    {
+      "fieldName": "adresse",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "dateCreation",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "etat",
+      "fieldType": "EtatDemandeur",
+      "fieldValues": "Actif,Inactif,Bani,Suspendu,Revoque"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Demandeur",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "login",
+      "otherEntityName": "user",
+      "ownerSide": true,
+      "relationshipName": "user",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "demandeDeTraduction",
+      "otherEntityRelationshipName": "demandeurService",
+      "relationshipName": "demandes",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "commentaire",
+      "otherEntityRelationshipName": "demandeur",
+      "relationshipName": "commentaire",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "terjemTheque",
+      "otherEntityRelationshipName": "demandeur",
+      "relationshipName": "terjemTheque",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "notation",
+      "otherEntityRelationshipName": "demandeur",
+      "relationshipName": "notation",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "nom",
+      "otherEntityName": "ville",
+      "relationshipName": "ville",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "libelle",
+      "otherEntityName": "banque",
+      "relationshipName": "banque",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "agenceBanque",
+      "otherEntityRelationshipName": "demandeur",
+      "relationshipName": "agenceBanque",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

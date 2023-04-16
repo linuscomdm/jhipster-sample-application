@@ -1,0 +1,20 @@
+{
+  "applications": "*",
+  "changelogDate": "20230416123421",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "ville",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Ville",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceClass"
+}

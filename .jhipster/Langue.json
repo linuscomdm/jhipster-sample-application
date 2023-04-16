@@ -1,0 +1,32 @@
+{
+  "applications": "*",
+  "changelogDate": "20230416123414",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "langue",
+  "fields": [
+    {
+      "fieldName": "codeLangue",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "nomLangue",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Langue",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "nombreDePagesATraduire",
+      "otherEntityName": "documentATraduire",
+      "otherEntityRelationshipName": "documens",
+      "relationshipName": "docTraductions",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

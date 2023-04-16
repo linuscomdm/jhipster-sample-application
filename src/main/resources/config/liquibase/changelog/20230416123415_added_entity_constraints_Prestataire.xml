@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Prestataire.
+    -->
+    <changeSet id="20230416123415-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="prestataire"
+                                 constraintName="fk_prestataire__user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="banque_id"
+                                 baseTableName="prestataire"
+                                 constraintName="fk_prestataire__banque_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="banque"/>
+
+        <addForeignKeyConstraint baseColumnNames="ville_id"
+                                 baseTableName="prestataire"
+                                 constraintName="fk_prestataire__ville_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ville"/>
+
+        <addForeignKeyConstraint baseColumnNames="presta_dde_traductions_id"
+                                 baseTableName="prestataire"
+                                 constraintName="fk_prestataire__presta_dde_traductions_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="demande_de_traduction"/>
+
+        <addForeignKeyConstraint baseColumnNames="agence_banque_id"
+                                 baseTableName="prestataire"
+                                 constraintName="fk_prestataire__agence_banque_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="agence_banque"/>
+    </changeSet>
+</databaseChangeLog>

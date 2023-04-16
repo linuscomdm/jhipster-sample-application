@@ -1,0 +1,10 @@
+{
+  "jhipsterSampleApplicationApp": {
+    "ModeLivraison": {
+      "null": "",
+      "COURRIERPOSTAL": "COURRIERPOSTAL",
+      "EMAIL": "EMAIL",
+      "REMISEENMAINSPROPRES": "REMISEENMAINSPROPRES"
+    }
+  }
+}
