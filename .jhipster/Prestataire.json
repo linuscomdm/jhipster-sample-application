@@ -1,0 +1,180 @@
+{
+  "applications": "*",
+  "changelogDate": "20230416123510",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "prestataire",
+  "fields": [
+    {
+      "fieldName": "civilite",
+      "fieldType": "Civilite",
+      "fieldValues": "Madame,Monsieur,Mademoiselle"
+    },
+    {
+      "fieldName": "nom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "80"
+    },
+    {
+      "fieldName": "prenom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "80"
+    },
+    {
+      "fieldName": "nomCommercial",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "80"
+    },
+    {
+      "fieldName": "telephoneTravail",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "30"
+    },
+    {
+      "fieldName": "telephoneMobile",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "30"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "pattern", "maxlength"],
+      "fieldValidateRulesMaxlength": "50",
+      "fieldValidateRulesPattern": "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}"
+    },
+    {
+      "fieldName": "adresse",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "70"
+    },
+    {
+      "fieldName": "codePostal",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "10"
+    },
+    {
+      "fieldName": "photoDeProfil",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "numeroPieceIdentite",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "typeIdentiteProfessionnelle",
+      "fieldType": "TypeIdentiteProfessionnelle",
+      "fieldValues": "MATRIULEFISCAL,CARTEPROFESSIONNEL"
+    },
+    {
+      "fieldName": "rattachIdentitePro",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "coordonneesBancaires",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "titulaireDuCompte",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "80"
+    },
+    {
+      "fieldName": "ribOuRip",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "20"
+    },
+    {
+      "fieldName": "dateCreation",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "etat",
+      "fieldType": "EtatPrestataire",
+      "fieldValues": "Actif,Inactif"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Prestataire",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "login",
+      "otherEntityName": "user",
+      "ownerSide": true,
+      "relationshipName": "user",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "pieceJointe",
+      "otherEntityRelationshipName": "prestataire",
+      "relationshipName": "pieceJointe",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "devis",
+      "otherEntityRelationshipName": "prestataire",
+      "relationshipName": "devis",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "commentaire",
+      "otherEntityRelationshipName": "prestataire",
+      "relationshipName": "commentaire",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "terjemTheque",
+      "otherEntityRelationshipName": "prestataire",
+      "relationshipName": "terjemTheque",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "notation",
+      "otherEntityRelationshipName": "prestataire",
+      "relationshipName": "notation",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "libelle",
+      "otherEntityName": "banque",
+      "relationshipName": "banque",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "nom",
+      "otherEntityName": "ville",
+      "relationshipName": "ville",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "delaiDeTraitemenSouhaite",
+      "otherEntityName": "demandeDeTraduction",
+      "otherEntityRelationshipName": "traductionsPresta",
+      "relationshipName": "prestaDdeTraductions",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "agenceBanque",
+      "otherEntityRelationshipName": "prestataire",
+      "relationshipName": "agenceBanque",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

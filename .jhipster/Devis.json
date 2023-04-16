@@ -1,0 +1,57 @@
+{
+  "applications": "*",
+  "changelogDate": "20230416123506",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "devis",
+  "fields": [
+    {
+      "fieldName": "numero",
+      "fieldType": "String",
+      "fieldValidateRules": ["minlength", "maxlength", "required"],
+      "fieldValidateRulesMaxlength": "30",
+      "fieldValidateRulesMinlength": "2"
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "prixTotal",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "etat",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Devis",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "detailDevis",
+      "otherEntityRelationshipName": "devis",
+      "relationshipName": "detailDevis",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "prestataire",
+      "otherEntityRelationshipName": "devis",
+      "relationshipName": "prestataire",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "demandeDeTraduction",
+      "otherEntityRelationshipName": "devis",
+      "relationshipName": "demandeDeTraduction",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity DocumentATraduire.
+    -->
+    <changeSet id="20230416123505-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="langue_destination_id"
+                                 baseTableName="document_a_traduire"
+                                 constraintName="fk_document_a_traduire__langue_destination_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="langue"/>
+
+        <addForeignKeyConstraint baseColumnNames="type_document_id"
+                                 baseTableName="document_a_traduire"
+                                 constraintName="fk_document_a_traduire__type_document_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="nature_document_a_traduire"/>
+
+        <addForeignKeyConstraint baseColumnNames="demande_traductions_id"
+                                 baseTableName="document_a_traduire"
+                                 constraintName="fk_document_a_traduire__demande_traductions_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="demande_de_traduction"/>
+    </changeSet>
+</databaseChangeLog>

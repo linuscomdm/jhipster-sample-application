@@ -1,0 +1,44 @@
+{
+  "applications": "*",
+  "changelogDate": "20230416123511",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "notation",
+  "fields": [
+    {
+      "fieldName": "notetation",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "commentaire",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "150"
+    },
+    {
+      "fieldName": "dateCreation",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Notation",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "demandeur",
+      "otherEntityRelationshipName": "notation",
+      "relationshipName": "demandeur",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "prestataire",
+      "otherEntityRelationshipName": "notation",
+      "relationshipName": "prestataire",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

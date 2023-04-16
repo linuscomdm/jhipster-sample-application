@@ -1,0 +1,51 @@
+{
+  "jhipsterSampleApplicationApp": {
+    "prestataire": {
+      "home": {
+        "title": "Prestataires",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Prestataire",
+        "createOrEditLabel": "Créer ou éditer un Prestataire",
+        "notFound": "Aucun Prestataire trouvé"
+      },
+      "created": "Un nouveau Prestataire a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Prestataire avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Prestataire avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Prestataire {{ id }} ?"
+      },
+      "detail": {
+        "title": "Prestataire"
+      },
+      "id": "ID",
+      "civilite": "Civilite",
+      "nom": "Nom",
+      "prenom": "Prenom",
+      "nomCommercial": "Nom Commercial",
+      "telephoneTravail": "Telephone Travail",
+      "telephoneMobile": "Telephone Mobile",
+      "email": "Email",
+      "adresse": "Adresse",
+      "codePostal": "Code Postal",
+      "photoDeProfil": "Photo De Profil",
+      "numeroPieceIdentite": "Numero Piece Identite",
+      "typeIdentiteProfessionnelle": "Type Identite Professionnelle",
+      "rattachIdentitePro": "Rattach Identite Pro",
+      "coordonneesBancaires": "Coordonnees Bancaires",
+      "titulaireDuCompte": "Titulaire Du Compte",
+      "ribOuRip": "Rib Ou Rip",
+      "dateCreation": "Date Creation",
+      "etat": "Etat",
+      "user": "User",
+      "pieceJointe": "Piece Jointe",
+      "devis": "Devis",
+      "commentaire": "Commentaire",
+      "terjemTheque": "Terjem Theque",
+      "notation": "Notation",
+      "banque": "Banque",
+      "ville": "Ville",
+      "prestaDdeTraductions": "Presta Dde Traductions",
+      "agenceBanque": "Agence Banque"
+    }
+  }
+}

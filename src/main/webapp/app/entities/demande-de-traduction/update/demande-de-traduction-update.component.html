@@ -1,0 +1,252 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-demande-de-traduction-heading"
+        data-cy="DemandeDeTraductionCreateUpdateHeading"
+        jhiTranslate="jhipsterSampleApplicationApp.demandeDeTraduction.home.createOrEditLabel"
+      >
+        Créer ou éditer un Demande De Traduction
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="jhipsterSampleApplicationApp.demandeDeTraduction.modeEnvoiPreconise"
+            for="field_modeEnvoiPreconise"
+            >Mode Envoi Preconise</label
+          >
+          <select
+            class="form-control"
+            name="modeEnvoiPreconise"
+            formControlName="modeEnvoiPreconise"
+            id="field_modeEnvoiPreconise"
+            data-cy="modeEnvoiPreconise"
+          >
+            <option [ngValue]="null">{{ 'jhipsterSampleApplicationApp.ModeEnvoi.null' | translate }}</option>
+            <option *ngFor="let modeEnvoi of modeEnvoiValues" [value]="modeEnvoi">
+              {{ 'jhipsterSampleApplicationApp.ModeEnvoi.' + modeEnvoi | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="jhipsterSampleApplicationApp.demandeDeTraduction.modeLivraisonExige"
+            for="field_modeLivraisonExige"
+            >Mode Livraison Exige</label
+          >
+          <select
+            class="form-control"
+            name="modeLivraisonExige"
+            formControlName="modeLivraisonExige"
+            id="field_modeLivraisonExige"
+            data-cy="modeLivraisonExige"
+          >
+            <option [ngValue]="null">{{ 'jhipsterSampleApplicationApp.ModeLivraison.null' | translate }}</option>
+            <option *ngFor="let modeLivraison of modeLivraisonValues" [value]="modeLivraison">
+              {{ 'jhipsterSampleApplicationApp.ModeLivraison.' + modeLivraison | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="jhipsterSampleApplicationApp.demandeDeTraduction.delaiDeTraitemenSouhaite"
+            for="field_delaiDeTraitemenSouhaite"
+            >Delai De Traitemen Souhaite</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="delaiDeTraitemenSouhaite"
+            id="field_delaiDeTraitemenSouhaite"
+            data-cy="delaiDeTraitemenSouhaite"
+            formControlName="delaiDeTraitemenSouhaite"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="jhipsterSampleApplicationApp.demandeDeTraduction.adresseLivraison"
+            for="field_adresseLivraison"
+            >Adresse Livraison</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="adresseLivraison"
+            id="field_adresseLivraison"
+            data-cy="adresseLivraison"
+            formControlName="adresseLivraison"
+          />
+          <div
+            *ngIf="
+              editForm.get('adresseLivraison')!.invalid &&
+              (editForm.get('adresseLivraison')!.dirty || editForm.get('adresseLivraison')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('adresseLivraison')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 150 }"
+            >
+              Ce champ doit faire moins de 150 caractères.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="jhipsterSampleApplicationApp.demandeDeTraduction.delaiDeTraitemenPrestataire"
+            for="field_delaiDeTraitemenPrestataire"
+            >Delai De Traitemen Prestataire</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="delaiDeTraitemenPrestataire"
+            id="field_delaiDeTraitemenPrestataire"
+            data-cy="delaiDeTraitemenPrestataire"
+            formControlName="delaiDeTraitemenPrestataire"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.demandeDeTraduction.observation" for="field_observation"
+            >Observation</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="observation"
+            id="field_observation"
+            data-cy="observation"
+            formControlName="observation"
+          />
+          <div *ngIf="editForm.get('observation')!.invalid && (editForm.get('observation')!.dirty || editForm.get('observation')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('observation')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 500 }"
+            >
+              Ce champ doit faire moins de 500 caractères.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.demandeDeTraduction.dateCreation" for="field_dateCreation"
+            >Date Creation</label
+          >
+          <div class="input-group">
+            <input
+              id="field_dateCreation"
+              data-cy="dateCreation"
+              type="text"
+              class="form-control"
+              name="dateCreation"
+              ngbDatepicker
+              #dateCreationDp="ngbDatepicker"
+              formControlName="dateCreation"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateCreationDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.demandeDeTraduction.dateCloture" for="field_dateCloture"
+            >Date Cloture</label
+          >
+          <div class="input-group">
+            <input
+              id="field_dateCloture"
+              data-cy="dateCloture"
+              type="text"
+              class="form-control"
+              name="dateCloture"
+              ngbDatepicker
+              #dateClotureDp="ngbDatepicker"
+              formControlName="dateCloture"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateClotureDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.demandeDeTraduction.etat" for="field_etat">Etat</label>
+          <select class="form-control" name="etat" formControlName="etat" id="field_etat" data-cy="etat">
+            <option [ngValue]="null">{{ 'jhipsterSampleApplicationApp.EtatDemande.null' | translate }}</option>
+            <option *ngFor="let etatDemande of etatDemandeValues" [value]="etatDemande">
+              {{ 'jhipsterSampleApplicationApp.EtatDemande.' + etatDemande | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.demandeDeTraduction.ville" for="field_ville">Ville</label>
+          <select class="form-control" id="field_ville" data-cy="ville" name="ville" formControlName="ville" [compareWith]="compareVille">
+            <option [ngValue]="null"></option>
+            <option [ngValue]="villeOption" *ngFor="let villeOption of villesSharedCollection">{{ villeOption.nom }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="jhipsterSampleApplicationApp.demandeDeTraduction.demandeurService"
+            for="field_demandeurService"
+            >Demandeur Service</label
+          >
+          <select
+            class="form-control"
+            id="field_demandeurService"
+            data-cy="demandeurService"
+            name="demandeurService"
+            formControlName="demandeurService"
+            [compareWith]="compareDemandeur"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="demandeurOption" *ngFor="let demandeurOption of demandeursSharedCollection">
+              {{ demandeurOption.nom }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,156 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="prestataire">
+      <h2 data-cy="prestataireDetailsHeading">
+        <span jhiTranslate="jhipsterSampleApplicationApp.prestataire.detail.title">Prestataire</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ prestataire.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.prestataire.civilite">Civilite</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'jhipsterSampleApplicationApp.Civilite.' + prestataire.civilite }}">{{ prestataire.civilite }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.prestataire.nom">Nom</span></dt>
+        <dd>
+          <span>{{ prestataire.nom }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.prestataire.prenom">Prenom</span></dt>
+        <dd>
+          <span>{{ prestataire.prenom }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.prestataire.nomCommercial">Nom Commercial</span></dt>
+        <dd>
+          <span>{{ prestataire.nomCommercial }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.prestataire.telephoneTravail">Telephone Travail</span></dt>
+        <dd>
+          <span>{{ prestataire.telephoneTravail }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.prestataire.telephoneMobile">Telephone Mobile</span></dt>
+        <dd>
+          <span>{{ prestataire.telephoneMobile }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.prestataire.email">Email</span></dt>
+        <dd>
+          <span>{{ prestataire.email }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.prestataire.adresse">Adresse</span></dt>
+        <dd>
+          <span>{{ prestataire.adresse }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.prestataire.codePostal">Code Postal</span></dt>
+        <dd>
+          <span>{{ prestataire.codePostal }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.prestataire.photoDeProfil">Photo De Profil</span></dt>
+        <dd>
+          <div *ngIf="prestataire.photoDeProfil">
+            <a (click)="openFile(prestataire.photoDeProfil, prestataire.photoDeProfilContentType)" jhiTranslate="entity.action.open"
+              >Ouvrir</a
+            >
+            {{ prestataire.photoDeProfilContentType }}, {{ byteSize(prestataire.photoDeProfil) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.prestataire.numeroPieceIdentite">Numero Piece Identite</span></dt>
+        <dd>
+          <span>{{ prestataire.numeroPieceIdentite }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipsterSampleApplicationApp.prestataire.typeIdentiteProfessionnelle">Type Identite Professionnelle</span>
+        </dt>
+        <dd>
+          <span
+            jhiTranslate="{{ 'jhipsterSampleApplicationApp.TypeIdentiteProfessionnelle.' + prestataire.typeIdentiteProfessionnelle }}"
+            >{{ prestataire.typeIdentiteProfessionnelle }}</span
+          >
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.prestataire.rattachIdentitePro">Rattach Identite Pro</span></dt>
+        <dd>
+          <div *ngIf="prestataire.rattachIdentitePro">
+            <a
+              (click)="openFile(prestataire.rattachIdentitePro, prestataire.rattachIdentiteProContentType)"
+              jhiTranslate="entity.action.open"
+              >Ouvrir</a
+            >
+            {{ prestataire.rattachIdentiteProContentType }}, {{ byteSize(prestataire.rattachIdentitePro) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.prestataire.coordonneesBancaires">Coordonnees Bancaires</span></dt>
+        <dd>
+          <div *ngIf="prestataire.coordonneesBancaires">
+            <a
+              (click)="openFile(prestataire.coordonneesBancaires, prestataire.coordonneesBancairesContentType)"
+              jhiTranslate="entity.action.open"
+              >Ouvrir</a
+            >
+            {{ prestataire.coordonneesBancairesContentType }}, {{ byteSize(prestataire.coordonneesBancaires) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.prestataire.titulaireDuCompte">Titulaire Du Compte</span></dt>
+        <dd>
+          <span>{{ prestataire.titulaireDuCompte }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.prestataire.ribOuRip">Rib Ou Rip</span></dt>
+        <dd>
+          <span>{{ prestataire.ribOuRip }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.prestataire.dateCreation">Date Creation</span></dt>
+        <dd>
+          <span>{{ prestataire.dateCreation | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.prestataire.etat">Etat</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'jhipsterSampleApplicationApp.EtatPrestataire.' + prestataire.etat }}">{{ prestataire.etat }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.prestataire.user">User</span></dt>
+        <dd>
+          <span>{{ prestataire.user?.login }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.prestataire.banque">Banque</span></dt>
+        <dd>
+          <div *ngIf="prestataire.banque">
+            <a [routerLink]="['/banque', prestataire.banque.id, 'view']">{{ prestataire.banque.libelle }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.prestataire.ville">Ville</span></dt>
+        <dd>
+          <div *ngIf="prestataire.ville">
+            <a [routerLink]="['/ville', prestataire.ville.id, 'view']">{{ prestataire.ville.nom }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.prestataire.prestaDdeTraductions">Presta Dde Traductions</span></dt>
+        <dd>
+          <div *ngIf="prestataire.prestaDdeTraductions">
+            <a [routerLink]="['/demande-de-traduction', prestataire.prestaDdeTraductions.id, 'view']">{{
+              prestataire.prestaDdeTraductions.delaiDeTraitemenSouhaite
+            }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.prestataire.agenceBanque">Agence Banque</span></dt>
+        <dd>
+          <div *ngIf="prestataire.agenceBanque">
+            <a [routerLink]="['/agence-banque', prestataire.agenceBanque.id, 'view']">{{ prestataire.agenceBanque.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/prestataire', prestataire.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+      </button>
+    </div>
+  </div>
+</div>

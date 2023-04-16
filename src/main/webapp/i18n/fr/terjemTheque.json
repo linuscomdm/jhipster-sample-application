@@ -1,0 +1,31 @@
+{
+  "jhipsterSampleApplicationApp": {
+    "terjemTheque": {
+      "home": {
+        "title": "TerjemTheques",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Terjem Theque",
+        "createOrEditLabel": "Créer ou éditer un Terjem Theque",
+        "notFound": "Aucun Terjem Theque trouvé"
+      },
+      "created": "Un nouveau Terjem Theque a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Terjem Theque avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Terjem Theque avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Terjem Theque {{ id }} ?"
+      },
+      "detail": {
+        "title": "Terjem Theque"
+      },
+      "id": "ID",
+      "lienDownload": "Lien Download",
+      "formatDocTraduit": "Format Doc Traduit",
+      "nomFichier": "Nom Fichier",
+      "docTraduit": "Doc Traduit",
+      "dateCreation": "Date Creation",
+      "etat": "Etat",
+      "prestataire": "Prestataire",
+      "demandeur": "Demandeur"
+    }
+  }
+}

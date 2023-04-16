@@ -1,0 +1,72 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="documentATraduire">
+      <h2 data-cy="documentATraduireDetailsHeading">
+        <span jhiTranslate="jhipsterSampleApplicationApp.documentATraduire.detail.title">Document A Traduire</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ documentATraduire.id }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipsterSampleApplicationApp.documentATraduire.nombreDePagesATraduire">Nombre De Pages A Traduire</span>
+        </dt>
+        <dd>
+          <span>{{ documentATraduire.nombreDePagesATraduire }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipsterSampleApplicationApp.documentATraduire.mentionTraitementParticulier"
+            >Mention Traitement Particulier</span
+          >
+        </dt>
+        <dd>
+          <span>{{ documentATraduire.mentionTraitementParticulier }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.documentATraduire.remarques">Remarques</span></dt>
+        <dd>
+          <span>{{ documentATraduire.remarques }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.documentATraduire.langueDestination">Langue Destination</span></dt>
+        <dd>
+          <div *ngIf="documentATraduire.langueDestination">
+            <a [routerLink]="['/langue', documentATraduire.langueDestination.id, 'view']">{{
+              documentATraduire.langueDestination.nomLangue
+            }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.documentATraduire.typeDocument">Type Document</span></dt>
+        <dd>
+          <div *ngIf="documentATraduire.typeDocument">
+            <a [routerLink]="['/nature-document-a-traduire', documentATraduire.typeDocument.id, 'view']">{{
+              documentATraduire.typeDocument.typeDocument
+            }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.documentATraduire.demandeTraductions">Demande Traductions</span></dt>
+        <dd>
+          <div *ngIf="documentATraduire.demandeTraductions">
+            <a [routerLink]="['/demande-de-traduction', documentATraduire.demandeTraductions.id, 'view']">{{
+              documentATraduire.demandeTraductions.delaiDeTraitemenSouhaite
+            }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/document-a-traduire', documentATraduire.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+      </button>
+    </div>
+  </div>
+</div>

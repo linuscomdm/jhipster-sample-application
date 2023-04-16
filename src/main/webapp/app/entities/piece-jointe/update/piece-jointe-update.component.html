@@ -1,0 +1,244 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-piece-jointe-heading"
+        data-cy="PieceJointeCreateUpdateHeading"
+        jhiTranslate="jhipsterSampleApplicationApp.pieceJointe.home.createOrEditLabel"
+      >
+        Créer ou éditer un Piece Jointe
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.pieceJointe.nomFichier" for="field_nomFichier"
+            >Nom Fichier</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="nomFichier"
+            id="field_nomFichier"
+            data-cy="nomFichier"
+            formControlName="nomFichier"
+          />
+          <div *ngIf="editForm.get('nomFichier')!.invalid && (editForm.get('nomFichier')!.dirty || editForm.get('nomFichier')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('nomFichier')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              Ce champ est obligatoire.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('nomFichier')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 150 }"
+            >
+              Ce champ doit faire moins de 150 caractères.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.pieceJointe.chemin" for="field_chemin">Chemin</label>
+          <input type="text" class="form-control" name="chemin" id="field_chemin" data-cy="chemin" formControlName="chemin" />
+          <div *ngIf="editForm.get('chemin')!.invalid && (editForm.get('chemin')!.dirty || editForm.get('chemin')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('chemin')?.errors?.required" jhiTranslate="entity.validation.required">
+              Ce champ est obligatoire.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('chemin')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 500 }"
+            >
+              Ce champ doit faire moins de 500 caractères.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.pieceJointe.urlPiece" for="field_urlPiece">Url Piece</label>
+          <input type="text" class="form-control" name="urlPiece" id="field_urlPiece" data-cy="urlPiece" formControlName="urlPiece" />
+          <div *ngIf="editForm.get('urlPiece')!.invalid && (editForm.get('urlPiece')!.dirty || editForm.get('urlPiece')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('urlPiece')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              Ce champ est obligatoire.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('urlPiece')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 500 }"
+            >
+              Ce champ doit faire moins de 500 caractères.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.pieceJointe.description" for="field_description"
+            >Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.pieceJointe.codePiece" for="field_codePiece"
+            >Code Piece</label
+          >
+          <input type="text" class="form-control" name="codePiece" id="field_codePiece" data-cy="codePiece" formControlName="codePiece" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.pieceJointe.libellePiece" for="field_libellePiece"
+            >Libelle Piece</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="libellePiece"
+            id="field_libellePiece"
+            data-cy="libellePiece"
+            formControlName="libellePiece"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.pieceJointe.rattachPj" for="field_rattachPj"
+            >Rattach Pj</label
+          >
+          <div>
+            <div *ngIf="editForm.get('rattachPj')!.value" class="form-text text-danger clearfix">
+              <a
+                class="pull-start"
+                (click)="openFile(editForm.get('rattachPj')!.value!, editForm.get('rattachPjContentType')!.value!)"
+                jhiTranslate="entity.action.open"
+                >Ouvrir</a
+              ><br />
+              <span class="pull-start"
+                >{{ editForm.get('rattachPjContentType')!.value }}, {{ byteSize(editForm.get('rattachPj')!.value!) }}</span
+              >
+              <button
+                type="button"
+                (click)="editForm.patchValue({ rattachPj: undefined, rattachPjContentType: undefined })"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_rattachPj"
+              data-cy="rattachPj"
+              (change)="setFileData($event, 'rattachPj', false)"
+              jhiTranslate="entity.action.addblob"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="rattachPj" id="field_rattachPj" data-cy="rattachPj" formControlName="rattachPj" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="rattachPjContentType"
+            id="field_rattachPjContentType"
+            formControlName="rattachPjContentType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.pieceJointe.dateCreation" for="field_dateCreation"
+            >Date Creation</label
+          >
+          <div class="input-group">
+            <input
+              id="field_dateCreation"
+              data-cy="dateCreation"
+              type="text"
+              class="form-control"
+              name="dateCreation"
+              ngbDatepicker
+              #dateCreationDp="ngbDatepicker"
+              formControlName="dateCreation"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateCreationDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.pieceJointe.pjDdeTraductions" for="field_pjDdeTraductions"
+            >Pj Dde Traductions</label
+          >
+          <select
+            class="form-control"
+            id="field_pjDdeTraductions"
+            data-cy="pjDdeTraductions"
+            name="pjDdeTraductions"
+            formControlName="pjDdeTraductions"
+            [compareWith]="compareDemandeDeTraduction"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="demandeDeTraductionOption" *ngFor="let demandeDeTraductionOption of demandeDeTraductionsSharedCollection">
+              {{ demandeDeTraductionOption.delaiDeTraitemenSouhaite }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.pieceJointe.prestataire" for="field_prestataire"
+            >Prestataire</label
+          >
+          <select
+            class="form-control"
+            id="field_prestataire"
+            data-cy="prestataire"
+            name="prestataire"
+            formControlName="prestataire"
+            [compareWith]="comparePrestataire"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="prestataireOption" *ngFor="let prestataireOption of prestatairesSharedCollection">
+              {{ prestataireOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

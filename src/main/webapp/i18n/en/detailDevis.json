@@ -1,0 +1,28 @@
+{
+  "jhipsterSampleApplicationApp": {
+    "detailDevis": {
+      "home": {
+        "title": "Detail Devis",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Detail Devis",
+        "createOrEditLabel": "Create or edit a Detail Devis",
+        "notFound": "No Detail Devis found"
+      },
+      "created": "A new Detail Devis is created with identifier {{ param }}",
+      "updated": "A Detail Devis is updated with identifier {{ param }}",
+      "deleted": "A Detail Devis is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Detail Devis {{ id }}?"
+      },
+      "detail": {
+        "title": "Detail Devis"
+      },
+      "id": "ID",
+      "qte": "Qte",
+      "prixUnitaire": "Prix Unitaire",
+      "prixTotal": "Prix Total",
+      "etat": "Etat",
+      "devis": "Devis"
+    }
+  }
+}

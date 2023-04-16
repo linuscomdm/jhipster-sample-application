@@ -11,7 +11,34 @@
     <property name="datetimeType" value="datetime(6)" dbms="mysql"/>
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230416123503_added_entity_Demandeur.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230416123504_added_entity_DemandeDeTraduction.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230416123505_added_entity_DocumentATraduire.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230416123506_added_entity_Devis.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230416123507_added_entity_DetailDevis.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230416123508_added_entity_NatureDocumentATraduire.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230416123509_added_entity_Langue.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230416123510_added_entity_Prestataire.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230416123511_added_entity_Notation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230416123512_added_entity_PieceJointe.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230416123513_added_entity_TerjemTheque.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230416123514_added_entity_Banque.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230416123515_added_entity_AgenceBanque.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230416123516_added_entity_Ville.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230416123517_added_entity_Commentaire.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20230416123503_added_entity_constraints_Demandeur.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230416123504_added_entity_constraints_DemandeDeTraduction.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230416123505_added_entity_constraints_DocumentATraduire.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230416123506_added_entity_constraints_Devis.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230416123507_added_entity_constraints_DetailDevis.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230416123509_added_entity_constraints_Langue.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230416123510_added_entity_constraints_Prestataire.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230416123511_added_entity_constraints_Notation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230416123512_added_entity_constraints_PieceJointe.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230416123513_added_entity_constraints_TerjemTheque.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230416123515_added_entity_constraints_AgenceBanque.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230416123517_added_entity_constraints_Commentaire.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

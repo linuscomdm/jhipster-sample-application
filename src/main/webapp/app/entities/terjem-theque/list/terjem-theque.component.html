@@ -1,0 +1,173 @@
+<div>
+  <h2 id="page-heading" data-cy="TerjemThequeHeading">
+    <span jhiTranslate="jhipsterSampleApplicationApp.terjemTheque.home.title">TerjemTheques</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="jhipsterSampleApplicationApp.terjemTheque.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-terjem-theque"
+        [routerLink]="['/terjem-theque/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="jhipsterSampleApplicationApp.terjemTheque.home.createLabel"> Créer un nouveau Terjem Theque </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="terjemTheques?.length === 0">
+    <span jhiTranslate="jhipsterSampleApplicationApp.terjemTheque.home.notFound">Aucun Terjem Theque trouvé</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="terjemTheques && terjemTheques.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="lienDownload">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.terjemTheque.lienDownload">Lien Download</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="formatDocTraduit">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.terjemTheque.formatDocTraduit">Format Doc Traduit</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="nomFichier">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.terjemTheque.nomFichier">Nom Fichier</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="docTraduit">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.terjemTheque.docTraduit">Doc Traduit</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="dateCreation">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.terjemTheque.dateCreation">Date Creation</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="etat">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.terjemTheque.etat">Etat</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="prestataire.id">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.terjemTheque.prestataire">Prestataire</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="demandeur.id">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.terjemTheque.demandeur">Demandeur</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let terjemTheque of terjemTheques; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/terjem-theque', terjemTheque.id, 'view']">{{ terjemTheque.id }}</a>
+          </td>
+          <td>{{ terjemTheque.lienDownload }}</td>
+          <td jhiTranslate="{{ 'jhipsterSampleApplicationApp.FormatDocTraduit.' + terjemTheque.formatDocTraduit }}">
+            {{ terjemTheque.formatDocTraduit }}
+          </td>
+          <td>{{ terjemTheque.nomFichier }}</td>
+          <td>
+            <a
+              *ngIf="terjemTheque.docTraduit"
+              (click)="openFile(terjemTheque.docTraduit, terjemTheque.docTraduitContentType)"
+              jhiTranslate="entity.action.open"
+              >Ouvrir</a
+            >
+            <span *ngIf="terjemTheque.docTraduit">{{ terjemTheque.docTraduitContentType }}, {{ byteSize(terjemTheque.docTraduit) }}</span>
+          </td>
+          <td>{{ terjemTheque.dateCreation | formatMediumDate }}</td>
+          <td>{{ terjemTheque.etat }}</td>
+          <td>
+            <div *ngIf="terjemTheque.prestataire">
+              <a [routerLink]="['/prestataire', terjemTheque.prestataire.id, 'view']">{{ terjemTheque.prestataire.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="terjemTheque.demandeur">
+              <a [routerLink]="['/demandeur', terjemTheque.demandeur.id, 'view']">{{ terjemTheque.demandeur.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/terjem-theque', terjemTheque.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/terjem-theque', terjemTheque.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+              </button>
+
+              <button type="submit" (click)="delete(terjemTheque)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="terjemTheques && terjemTheques.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>
