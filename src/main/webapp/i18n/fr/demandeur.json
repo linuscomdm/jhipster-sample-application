@@ -1,0 +1,40 @@
+{
+  "jhipsterSampleApplicationApp": {
+    "demandeur": {
+      "home": {
+        "title": "Demandeurs",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Demandeur",
+        "createOrEditLabel": "Créer ou éditer un Demandeur",
+        "notFound": "Aucun Demandeur trouvé"
+      },
+      "created": "Un nouveau Demandeur a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Demandeur avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Demandeur avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Demandeur {{ id }} ?"
+      },
+      "detail": {
+        "title": "Demandeur"
+      },
+      "id": "ID",
+      "civilite": "Civilite",
+      "nom": "Nom",
+      "prenom": "Prenom",
+      "dateDeNaissance": "Date De Naissance",
+      "telephone": "Telephone",
+      "email": "Email",
+      "adresse": "Adresse",
+      "dateCreation": "Date Creation",
+      "etat": "Etat",
+      "user": "User",
+      "demandes": "Demandes",
+      "commentaire": "Commentaire",
+      "terjemTheque": "Terjem Theque",
+      "notation": "Notation",
+      "ville": "Ville",
+      "banque": "Banque",
+      "agenceBanque": "Agence Banque"
+    }
+  }
+}

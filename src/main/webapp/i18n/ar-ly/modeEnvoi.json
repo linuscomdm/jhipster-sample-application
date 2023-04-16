@@ -1,0 +1,9 @@
+{
+  "jhipsterSampleApplicationApp": {
+    "ModeEnvoi": {
+      "null": "",
+      "COURRIERPOSTAL": "COURRIERPOSTAL",
+      "EMAIL": "EMAIL"
+    }
+  }
+}

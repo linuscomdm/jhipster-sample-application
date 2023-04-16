@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity TerjemTheque.
+    -->
+    <changeSet id="20230416123418-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="prestataire_id"
+                                 baseTableName="terjem_theque"
+                                 constraintName="fk_terjem_theque__prestataire_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="prestataire"/>
+
+        <addForeignKeyConstraint baseColumnNames="demandeur_id"
+                                 baseTableName="terjem_theque"
+                                 constraintName="fk_terjem_theque__demandeur_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="demandeur"/>
+    </changeSet>
+</databaseChangeLog>

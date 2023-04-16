@@ -1,0 +1,25 @@
+{
+  "jhipsterSampleApplicationApp": {
+    "natureDocumentATraduire": {
+      "home": {
+        "title": "NatureDocumentATraduires",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Nature Document A Traduire",
+        "createOrEditLabel": "Créer ou éditer un Nature Document A Traduire",
+        "notFound": "Aucun Nature Document A Traduire trouvé"
+      },
+      "created": "Un nouveau Nature Document A Traduire a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Nature Document A Traduire avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Nature Document A Traduire avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Nature Document A Traduire {{ id }} ?"
+      },
+      "detail": {
+        "title": "Nature Document A Traduire"
+      },
+      "id": "ID",
+      "codeType": "Code Type",
+      "typeDocument": "Type Document"
+    }
+  }
+}

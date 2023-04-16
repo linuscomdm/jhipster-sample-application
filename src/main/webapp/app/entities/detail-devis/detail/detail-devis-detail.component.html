@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="detailDevis">
+      <h2 data-cy="detailDevisDetailsHeading">
+        <span jhiTranslate="jhipsterSampleApplicationApp.detailDevis.detail.title">Detail Devis</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ detailDevis.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.detailDevis.qte">Qte</span></dt>
+        <dd>
+          <span>{{ detailDevis.qte }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.detailDevis.prixUnitaire">Prix Unitaire</span></dt>
+        <dd>
+          <span>{{ detailDevis.prixUnitaire }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.detailDevis.prixTotal">Prix Total</span></dt>
+        <dd>
+          <span>{{ detailDevis.prixTotal }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.detailDevis.etat">Etat</span></dt>
+        <dd>
+          <span>{{ detailDevis.etat }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.detailDevis.devis">Devis</span></dt>
+        <dd>
+          <div *ngIf="detailDevis.devis">
+            <a [routerLink]="['/devis', detailDevis.devis.id, 'view']">{{ detailDevis.devis.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/detail-devis', detailDevis.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+      </button>
+    </div>
+  </div>
+</div>

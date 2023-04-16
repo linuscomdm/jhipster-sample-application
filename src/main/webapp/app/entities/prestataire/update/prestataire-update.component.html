@@ -1,0 +1,601 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-prestataire-heading"
+        data-cy="PrestataireCreateUpdateHeading"
+        jhiTranslate="jhipsterSampleApplicationApp.prestataire.home.createOrEditLabel"
+      >
+        Créer ou éditer un Prestataire
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.prestataire.civilite" for="field_civilite">Civilite</label>
+          <select class="form-control" name="civilite" formControlName="civilite" id="field_civilite" data-cy="civilite">
+            <option [ngValue]="null">{{ 'jhipsterSampleApplicationApp.Civilite.null' | translate }}</option>
+            <option *ngFor="let civilite of civiliteValues" [value]="civilite">
+              {{ 'jhipsterSampleApplicationApp.Civilite.' + civilite | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.prestataire.nom" for="field_nom">Nom</label>
+          <input type="text" class="form-control" name="nom" id="field_nom" data-cy="nom" formControlName="nom" />
+          <div *ngIf="editForm.get('nom')!.invalid && (editForm.get('nom')!.dirty || editForm.get('nom')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('nom')?.errors?.required" jhiTranslate="entity.validation.required">
+              Ce champ est obligatoire.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('nom')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 80 }"
+            >
+              Ce champ doit faire moins de 80 caractères.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.prestataire.prenom" for="field_prenom">Prenom</label>
+          <input type="text" class="form-control" name="prenom" id="field_prenom" data-cy="prenom" formControlName="prenom" />
+          <div *ngIf="editForm.get('prenom')!.invalid && (editForm.get('prenom')!.dirty || editForm.get('prenom')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('prenom')?.errors?.required" jhiTranslate="entity.validation.required">
+              Ce champ est obligatoire.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('prenom')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 80 }"
+            >
+              Ce champ doit faire moins de 80 caractères.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.prestataire.nomCommercial" for="field_nomCommercial"
+            >Nom Commercial</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="nomCommercial"
+            id="field_nomCommercial"
+            data-cy="nomCommercial"
+            formControlName="nomCommercial"
+          />
+          <div
+            *ngIf="
+              editForm.get('nomCommercial')!.invalid && (editForm.get('nomCommercial')!.dirty || editForm.get('nomCommercial')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('nomCommercial')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 80 }"
+            >
+              Ce champ doit faire moins de 80 caractères.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.prestataire.telephoneTravail" for="field_telephoneTravail"
+            >Telephone Travail</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="telephoneTravail"
+            id="field_telephoneTravail"
+            data-cy="telephoneTravail"
+            formControlName="telephoneTravail"
+          />
+          <div
+            *ngIf="
+              editForm.get('telephoneTravail')!.invalid &&
+              (editForm.get('telephoneTravail')!.dirty || editForm.get('telephoneTravail')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('telephoneTravail')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 30 }"
+            >
+              Ce champ doit faire moins de 30 caractères.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.prestataire.telephoneMobile" for="field_telephoneMobile"
+            >Telephone Mobile</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="telephoneMobile"
+            id="field_telephoneMobile"
+            data-cy="telephoneMobile"
+            formControlName="telephoneMobile"
+          />
+          <div
+            *ngIf="
+              editForm.get('telephoneMobile')!.invalid &&
+              (editForm.get('telephoneMobile')!.dirty || editForm.get('telephoneMobile')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('telephoneMobile')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              Ce champ est obligatoire.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('telephoneMobile')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 30 }"
+            >
+              Ce champ doit faire moins de 30 caractères.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.prestataire.email" for="field_email">Email</label>
+          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+          <div *ngIf="editForm.get('email')!.invalid && (editForm.get('email')!.dirty || editForm.get('email')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('email')?.errors?.required" jhiTranslate="entity.validation.required">
+              Ce champ est obligatoire.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('email')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              Ce champ doit faire moins de 50 caractères.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('email')?.errors?.pattern"
+              jhiTranslate="entity.validation.pattern"
+              [translateValues]="{ pattern: 'Email' }"
+            >
+              Ce champ doit suivre l'expression régulière Email.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.prestataire.adresse" for="field_adresse">Adresse</label>
+          <input type="text" class="form-control" name="adresse" id="field_adresse" data-cy="adresse" formControlName="adresse" />
+          <div *ngIf="editForm.get('adresse')!.invalid && (editForm.get('adresse')!.dirty || editForm.get('adresse')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('adresse')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 70 }"
+            >
+              Ce champ doit faire moins de 70 caractères.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.prestataire.codePostal" for="field_codePostal"
+            >Code Postal</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="codePostal"
+            id="field_codePostal"
+            data-cy="codePostal"
+            formControlName="codePostal"
+          />
+          <div *ngIf="editForm.get('codePostal')!.invalid && (editForm.get('codePostal')!.dirty || editForm.get('codePostal')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('codePostal')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 10 }"
+            >
+              Ce champ doit faire moins de 10 caractères.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.prestataire.photoDeProfil" for="field_photoDeProfil"
+            >Photo De Profil</label
+          >
+          <div>
+            <div *ngIf="editForm.get('photoDeProfil')!.value" class="form-text text-danger clearfix">
+              <a
+                class="pull-start"
+                (click)="openFile(editForm.get('photoDeProfil')!.value!, editForm.get('photoDeProfilContentType')!.value!)"
+                jhiTranslate="entity.action.open"
+                >Ouvrir</a
+              ><br />
+              <span class="pull-start"
+                >{{ editForm.get('photoDeProfilContentType')!.value }}, {{ byteSize(editForm.get('photoDeProfil')!.value!) }}</span
+              >
+              <button
+                type="button"
+                (click)="editForm.patchValue({ photoDeProfil: undefined, photoDeProfilContentType: undefined })"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_photoDeProfil"
+              data-cy="photoDeProfil"
+              (change)="setFileData($event, 'photoDeProfil', false)"
+              jhiTranslate="entity.action.addblob"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="photoDeProfil"
+            id="field_photoDeProfil"
+            data-cy="photoDeProfil"
+            formControlName="photoDeProfil"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="photoDeProfilContentType"
+            id="field_photoDeProfilContentType"
+            formControlName="photoDeProfilContentType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="jhipsterSampleApplicationApp.prestataire.numeroPieceIdentite"
+            for="field_numeroPieceIdentite"
+            >Numero Piece Identite</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="numeroPieceIdentite"
+            id="field_numeroPieceIdentite"
+            data-cy="numeroPieceIdentite"
+            formControlName="numeroPieceIdentite"
+          />
+          <div
+            *ngIf="
+              editForm.get('numeroPieceIdentite')!.invalid &&
+              (editForm.get('numeroPieceIdentite')!.dirty || editForm.get('numeroPieceIdentite')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('numeroPieceIdentite')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              Ce champ est obligatoire.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('numeroPieceIdentite')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              Ce champ doit faire moins de 50 caractères.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="jhipsterSampleApplicationApp.prestataire.typeIdentiteProfessionnelle"
+            for="field_typeIdentiteProfessionnelle"
+            >Type Identite Professionnelle</label
+          >
+          <select
+            class="form-control"
+            name="typeIdentiteProfessionnelle"
+            formControlName="typeIdentiteProfessionnelle"
+            id="field_typeIdentiteProfessionnelle"
+            data-cy="typeIdentiteProfessionnelle"
+          >
+            <option [ngValue]="null">{{ 'jhipsterSampleApplicationApp.TypeIdentiteProfessionnelle.null' | translate }}</option>
+            <option *ngFor="let typeIdentiteProfessionnelle of typeIdentiteProfessionnelleValues" [value]="typeIdentiteProfessionnelle">
+              {{ 'jhipsterSampleApplicationApp.TypeIdentiteProfessionnelle.' + typeIdentiteProfessionnelle | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="jhipsterSampleApplicationApp.prestataire.rattachIdentitePro"
+            for="field_rattachIdentitePro"
+            >Rattach Identite Pro</label
+          >
+          <div>
+            <div *ngIf="editForm.get('rattachIdentitePro')!.value" class="form-text text-danger clearfix">
+              <a
+                class="pull-start"
+                (click)="openFile(editForm.get('rattachIdentitePro')!.value!, editForm.get('rattachIdentiteProContentType')!.value!)"
+                jhiTranslate="entity.action.open"
+                >Ouvrir</a
+              ><br />
+              <span class="pull-start"
+                >{{ editForm.get('rattachIdentiteProContentType')!.value }},
+                {{ byteSize(editForm.get('rattachIdentitePro')!.value!) }}</span
+              >
+              <button
+                type="button"
+                (click)="editForm.patchValue({ rattachIdentitePro: undefined, rattachIdentiteProContentType: undefined })"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_rattachIdentitePro"
+              data-cy="rattachIdentitePro"
+              (change)="setFileData($event, 'rattachIdentitePro', false)"
+              jhiTranslate="entity.action.addblob"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="rattachIdentitePro"
+            id="field_rattachIdentitePro"
+            data-cy="rattachIdentitePro"
+            formControlName="rattachIdentitePro"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="rattachIdentiteProContentType"
+            id="field_rattachIdentiteProContentType"
+            formControlName="rattachIdentiteProContentType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="jhipsterSampleApplicationApp.prestataire.coordonneesBancaires"
+            for="field_coordonneesBancaires"
+            >Coordonnees Bancaires</label
+          >
+          <div>
+            <div *ngIf="editForm.get('coordonneesBancaires')!.value" class="form-text text-danger clearfix">
+              <a
+                class="pull-start"
+                (click)="openFile(editForm.get('coordonneesBancaires')!.value!, editForm.get('coordonneesBancairesContentType')!.value!)"
+                jhiTranslate="entity.action.open"
+                >Ouvrir</a
+              ><br />
+              <span class="pull-start"
+                >{{ editForm.get('coordonneesBancairesContentType')!.value }},
+                {{ byteSize(editForm.get('coordonneesBancaires')!.value!) }}</span
+              >
+              <button
+                type="button"
+                (click)="editForm.patchValue({ coordonneesBancaires: undefined, coordonneesBancairesContentType: undefined })"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_coordonneesBancaires"
+              data-cy="coordonneesBancaires"
+              (change)="setFileData($event, 'coordonneesBancaires', false)"
+              jhiTranslate="entity.action.addblob"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="coordonneesBancaires"
+            id="field_coordonneesBancaires"
+            data-cy="coordonneesBancaires"
+            formControlName="coordonneesBancaires"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="coordonneesBancairesContentType"
+            id="field_coordonneesBancairesContentType"
+            formControlName="coordonneesBancairesContentType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.prestataire.titulaireDuCompte" for="field_titulaireDuCompte"
+            >Titulaire Du Compte</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="titulaireDuCompte"
+            id="field_titulaireDuCompte"
+            data-cy="titulaireDuCompte"
+            formControlName="titulaireDuCompte"
+          />
+          <div
+            *ngIf="
+              editForm.get('titulaireDuCompte')!.invalid &&
+              (editForm.get('titulaireDuCompte')!.dirty || editForm.get('titulaireDuCompte')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('titulaireDuCompte')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 80 }"
+            >
+              Ce champ doit faire moins de 80 caractères.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.prestataire.ribOuRip" for="field_ribOuRip">Rib Ou Rip</label>
+          <input type="text" class="form-control" name="ribOuRip" id="field_ribOuRip" data-cy="ribOuRip" formControlName="ribOuRip" />
+          <div *ngIf="editForm.get('ribOuRip')!.invalid && (editForm.get('ribOuRip')!.dirty || editForm.get('ribOuRip')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('ribOuRip')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 20 }"
+            >
+              Ce champ doit faire moins de 20 caractères.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.prestataire.dateCreation" for="field_dateCreation"
+            >Date Creation</label
+          >
+          <div class="input-group">
+            <input
+              id="field_dateCreation"
+              data-cy="dateCreation"
+              type="text"
+              class="form-control"
+              name="dateCreation"
+              ngbDatepicker
+              #dateCreationDp="ngbDatepicker"
+              formControlName="dateCreation"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateCreationDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.prestataire.etat" for="field_etat">Etat</label>
+          <select class="form-control" name="etat" formControlName="etat" id="field_etat" data-cy="etat">
+            <option [ngValue]="null">{{ 'jhipsterSampleApplicationApp.EtatPrestataire.null' | translate }}</option>
+            <option *ngFor="let etatPrestataire of etatPrestataireValues" [value]="etatPrestataire">
+              {{ 'jhipsterSampleApplicationApp.EtatPrestataire.' + etatPrestataire | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.prestataire.user" for="field_user">User</label>
+          <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user" [compareWith]="compareUser">
+            <option [ngValue]="null"></option>
+            <option [ngValue]="userOption" *ngFor="let userOption of usersSharedCollection">{{ userOption.login }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.prestataire.banque" for="field_banque">Banque</label>
+          <select
+            class="form-control"
+            id="field_banque"
+            data-cy="banque"
+            name="banque"
+            formControlName="banque"
+            [compareWith]="compareBanque"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="banqueOption" *ngFor="let banqueOption of banquesSharedCollection">{{ banqueOption.libelle }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.prestataire.ville" for="field_ville">Ville</label>
+          <select class="form-control" id="field_ville" data-cy="ville" name="ville" formControlName="ville" [compareWith]="compareVille">
+            <option [ngValue]="null"></option>
+            <option [ngValue]="villeOption" *ngFor="let villeOption of villesSharedCollection">{{ villeOption.nom }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="jhipsterSampleApplicationApp.prestataire.prestaDdeTraductions"
+            for="field_prestaDdeTraductions"
+            >Presta Dde Traductions</label
+          >
+          <select
+            class="form-control"
+            id="field_prestaDdeTraductions"
+            data-cy="prestaDdeTraductions"
+            name="prestaDdeTraductions"
+            formControlName="prestaDdeTraductions"
+            [compareWith]="compareDemandeDeTraduction"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="demandeDeTraductionOption" *ngFor="let demandeDeTraductionOption of demandeDeTraductionsSharedCollection">
+              {{ demandeDeTraductionOption.delaiDeTraitemenSouhaite }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.prestataire.agenceBanque" for="field_agenceBanque"
+            >Agence Banque</label
+          >
+          <select
+            class="form-control"
+            id="field_agenceBanque"
+            data-cy="agenceBanque"
+            name="agenceBanque"
+            formControlName="agenceBanque"
+            [compareWith]="compareAgenceBanque"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="agenceBanqueOption" *ngFor="let agenceBanqueOption of agenceBanquesSharedCollection">
+              {{ agenceBanqueOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

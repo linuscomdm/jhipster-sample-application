@@ -1,0 +1,5 @@
+export enum TypeIdentiteProfessionnelle {
+  MATRIULEFISCAL = 'MATRIULEFISCAL',
+
+  CARTEPROFESSIONNEL = 'CARTEPROFESSIONNEL',
+}

@@ -1,0 +1,92 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="demandeDeTraduction">
+      <h2 data-cy="demandeDeTraductionDetailsHeading">
+        <span jhiTranslate="jhipsterSampleApplicationApp.demandeDeTraduction.detail.title">Demande De Traduction</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ demandeDeTraduction.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.demandeDeTraduction.modeEnvoiPreconise">Mode Envoi Preconise</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'jhipsterSampleApplicationApp.ModeEnvoi.' + demandeDeTraduction.modeEnvoiPreconise }}">{{
+            demandeDeTraduction.modeEnvoiPreconise
+          }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.demandeDeTraduction.modeLivraisonExige">Mode Livraison Exige</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'jhipsterSampleApplicationApp.ModeLivraison.' + demandeDeTraduction.modeLivraisonExige }}">{{
+            demandeDeTraduction.modeLivraisonExige
+          }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipsterSampleApplicationApp.demandeDeTraduction.delaiDeTraitemenSouhaite">Delai De Traitemen Souhaite</span>
+        </dt>
+        <dd>
+          <span>{{ demandeDeTraduction.delaiDeTraitemenSouhaite }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.demandeDeTraduction.adresseLivraison">Adresse Livraison</span></dt>
+        <dd>
+          <span>{{ demandeDeTraduction.adresseLivraison }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="jhipsterSampleApplicationApp.demandeDeTraduction.delaiDeTraitemenPrestataire"
+            >Delai De Traitemen Prestataire</span
+          >
+        </dt>
+        <dd>
+          <span>{{ demandeDeTraduction.delaiDeTraitemenPrestataire }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.demandeDeTraduction.observation">Observation</span></dt>
+        <dd>
+          <span>{{ demandeDeTraduction.observation }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.demandeDeTraduction.dateCreation">Date Creation</span></dt>
+        <dd>
+          <span>{{ demandeDeTraduction.dateCreation | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.demandeDeTraduction.dateCloture">Date Cloture</span></dt>
+        <dd>
+          <span>{{ demandeDeTraduction.dateCloture | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.demandeDeTraduction.etat">Etat</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'jhipsterSampleApplicationApp.EtatDemande.' + demandeDeTraduction.etat }}">{{
+            demandeDeTraduction.etat
+          }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.demandeDeTraduction.ville">Ville</span></dt>
+        <dd>
+          <div *ngIf="demandeDeTraduction.ville">
+            <a [routerLink]="['/ville', demandeDeTraduction.ville.id, 'view']">{{ demandeDeTraduction.ville.nom }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.demandeDeTraduction.demandeurService">Demandeur Service</span></dt>
+        <dd>
+          <div *ngIf="demandeDeTraduction.demandeurService">
+            <a [routerLink]="['/demandeur', demandeDeTraduction.demandeurService.id, 'view']">{{
+              demandeDeTraduction.demandeurService.nom
+            }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/demande-de-traduction', demandeDeTraduction.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+      </button>
+    </div>
+  </div>
+</div>

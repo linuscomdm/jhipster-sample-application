@@ -1,0 +1,30 @@
+{
+  "jhipsterSampleApplicationApp": {
+    "documentATraduire": {
+      "home": {
+        "title": "Document A Traduires",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Document A Traduire",
+        "createOrEditLabel": "Create or edit a Document A Traduire",
+        "notFound": "No Document A Traduires found"
+      },
+      "created": "A new Document A Traduire is created with identifier {{ param }}",
+      "updated": "A Document A Traduire is updated with identifier {{ param }}",
+      "deleted": "A Document A Traduire is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Document A Traduire {{ id }}?"
+      },
+      "detail": {
+        "title": "Document A Traduire"
+      },
+      "id": "ID",
+      "nombreDePagesATraduire": "Nombre De Pages A Traduire",
+      "mentionTraitementParticulier": "Mention Traitement Particulier",
+      "remarques": "Remarques",
+      "documens": "Documens",
+      "langueDestination": "Langue Destination",
+      "typeDocument": "Type Document",
+      "demandeTraductions": "Demande Traductions"
+    }
+  }
+}

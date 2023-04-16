@@ -1,0 +1,189 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-document-a-traduire-heading"
+        data-cy="DocumentATraduireCreateUpdateHeading"
+        jhiTranslate="jhipsterSampleApplicationApp.documentATraduire.home.createOrEditLabel"
+      >
+        Créer ou éditer un Document A Traduire
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="jhipsterSampleApplicationApp.documentATraduire.nombreDePagesATraduire"
+            for="field_nombreDePagesATraduire"
+            >Nombre De Pages A Traduire</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="nombreDePagesATraduire"
+            id="field_nombreDePagesATraduire"
+            data-cy="nombreDePagesATraduire"
+            formControlName="nombreDePagesATraduire"
+          />
+          <div
+            *ngIf="
+              editForm.get('nombreDePagesATraduire')!.invalid &&
+              (editForm.get('nombreDePagesATraduire')!.dirty || editForm.get('nombreDePagesATraduire')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('nombreDePagesATraduire')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              Ce champ est obligatoire.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('nombreDePagesATraduire')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              Ce champ doit être un nombre.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="jhipsterSampleApplicationApp.documentATraduire.mentionTraitementParticulier"
+            for="field_mentionTraitementParticulier"
+            >Mention Traitement Particulier</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="mentionTraitementParticulier"
+            id="field_mentionTraitementParticulier"
+            data-cy="mentionTraitementParticulier"
+            formControlName="mentionTraitementParticulier"
+          />
+          <div
+            *ngIf="
+              editForm.get('mentionTraitementParticulier')!.invalid &&
+              (editForm.get('mentionTraitementParticulier')!.dirty || editForm.get('mentionTraitementParticulier')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('mentionTraitementParticulier')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 500 }"
+            >
+              Ce champ doit faire moins de 500 caractères.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.documentATraduire.remarques" for="field_remarques"
+            >Remarques</label
+          >
+          <input type="text" class="form-control" name="remarques" id="field_remarques" data-cy="remarques" formControlName="remarques" />
+          <div *ngIf="editForm.get('remarques')!.invalid && (editForm.get('remarques')!.dirty || editForm.get('remarques')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('remarques')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 500 }"
+            >
+              Ce champ doit faire moins de 500 caractères.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="jhipsterSampleApplicationApp.documentATraduire.langueDestination"
+            for="field_langueDestination"
+            >Langue Destination</label
+          >
+          <select
+            class="form-control"
+            id="field_langueDestination"
+            data-cy="langueDestination"
+            name="langueDestination"
+            formControlName="langueDestination"
+            [compareWith]="compareLangue"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="langueOption" *ngFor="let langueOption of languesSharedCollection">{{ langueOption.nomLangue }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.documentATraduire.typeDocument" for="field_typeDocument"
+            >Type Document</label
+          >
+          <select
+            class="form-control"
+            id="field_typeDocument"
+            data-cy="typeDocument"
+            name="typeDocument"
+            formControlName="typeDocument"
+            [compareWith]="compareNatureDocumentATraduire"
+          >
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="natureDocumentATraduireOption"
+              *ngFor="let natureDocumentATraduireOption of natureDocumentATraduiresSharedCollection"
+            >
+              {{ natureDocumentATraduireOption.typeDocument }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="jhipsterSampleApplicationApp.documentATraduire.demandeTraductions"
+            for="field_demandeTraductions"
+            >Demande Traductions</label
+          >
+          <select
+            class="form-control"
+            id="field_demandeTraductions"
+            data-cy="demandeTraductions"
+            name="demandeTraductions"
+            formControlName="demandeTraductions"
+            [compareWith]="compareDemandeDeTraduction"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="demandeDeTraductionOption" *ngFor="let demandeDeTraductionOption of demandeDeTraductionsSharedCollection">
+              {{ demandeDeTraductionOption.delaiDeTraitemenSouhaite }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

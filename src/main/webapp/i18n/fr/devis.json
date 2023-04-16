@@ -1,0 +1,30 @@
+{
+  "jhipsterSampleApplicationApp": {
+    "devis": {
+      "home": {
+        "title": "Devis",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Devis",
+        "createOrEditLabel": "Créer ou éditer un Devis",
+        "notFound": "Aucun Devis trouvé"
+      },
+      "created": "Un nouveau Devis a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Devis avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Devis avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Devis {{ id }} ?"
+      },
+      "detail": {
+        "title": "Devis"
+      },
+      "id": "ID",
+      "numero": "Numero",
+      "date": "Date",
+      "prixTotal": "Prix Total",
+      "etat": "Etat",
+      "detailDevis": "Detail Devis",
+      "prestataire": "Prestataire",
+      "demandeDeTraduction": "Demande De Traduction"
+    }
+  }
+}

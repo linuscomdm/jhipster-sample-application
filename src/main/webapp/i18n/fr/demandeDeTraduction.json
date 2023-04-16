@@ -1,0 +1,39 @@
+{
+  "jhipsterSampleApplicationApp": {
+    "demandeDeTraduction": {
+      "home": {
+        "title": "DemandeDeTraductions",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Demande De Traduction",
+        "createOrEditLabel": "Créer ou éditer un Demande De Traduction",
+        "notFound": "Aucun Demande De Traduction trouvé"
+      },
+      "created": "Un nouveau Demande De Traduction a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Demande De Traduction avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Demande De Traduction avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Demande De Traduction {{ id }} ?"
+      },
+      "detail": {
+        "title": "Demande De Traduction"
+      },
+      "id": "ID",
+      "modeEnvoiPreconise": "Mode Envoi Preconise",
+      "modeLivraisonExige": "Mode Livraison Exige",
+      "delaiDeTraitemenSouhaite": "Delai De Traitemen Souhaite",
+      "adresseLivraison": "Adresse Livraison",
+      "delaiDeTraitemenPrestataire": "Delai De Traitemen Prestataire",
+      "observation": "Observation",
+      "dateCreation": "Date Creation",
+      "dateCloture": "Date Cloture",
+      "etat": "Etat",
+      "traductions": "Traductions",
+      "traductionsPj": "Traductions Pj",
+      "traductionsPresta": "Traductions Presta",
+      "devis": "Devis",
+      "commentaire": "Commentaire",
+      "ville": "Ville",
+      "demandeurService": "Demandeur Service"
+    }
+  }
+}

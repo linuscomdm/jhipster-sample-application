@@ -1,0 +1,71 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="terjemTheque">
+      <h2 data-cy="terjemThequeDetailsHeading">
+        <span jhiTranslate="jhipsterSampleApplicationApp.terjemTheque.detail.title">Terjem Theque</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ terjemTheque.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.terjemTheque.lienDownload">Lien Download</span></dt>
+        <dd>
+          <span>{{ terjemTheque.lienDownload }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.terjemTheque.formatDocTraduit">Format Doc Traduit</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'jhipsterSampleApplicationApp.FormatDocTraduit.' + terjemTheque.formatDocTraduit }}">{{
+            terjemTheque.formatDocTraduit
+          }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.terjemTheque.nomFichier">Nom Fichier</span></dt>
+        <dd>
+          <span>{{ terjemTheque.nomFichier }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.terjemTheque.docTraduit">Doc Traduit</span></dt>
+        <dd>
+          <div *ngIf="terjemTheque.docTraduit">
+            <a (click)="openFile(terjemTheque.docTraduit, terjemTheque.docTraduitContentType)" jhiTranslate="entity.action.open">Ouvrir</a>
+            {{ terjemTheque.docTraduitContentType }}, {{ byteSize(terjemTheque.docTraduit) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.terjemTheque.dateCreation">Date Creation</span></dt>
+        <dd>
+          <span>{{ terjemTheque.dateCreation | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.terjemTheque.etat">Etat</span></dt>
+        <dd>
+          <span>{{ terjemTheque.etat }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.terjemTheque.prestataire">Prestataire</span></dt>
+        <dd>
+          <div *ngIf="terjemTheque.prestataire">
+            <a [routerLink]="['/prestataire', terjemTheque.prestataire.id, 'view']">{{ terjemTheque.prestataire.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.terjemTheque.demandeur">Demandeur</span></dt>
+        <dd>
+          <div *ngIf="terjemTheque.demandeur">
+            <a [routerLink]="['/demandeur', terjemTheque.demandeur.id, 'view']">{{ terjemTheque.demandeur.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/terjem-theque', terjemTheque.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+{
+  "jhipsterSampleApplicationApp": {
+    "Civilite": {
+      "null": "",
+      "Madame": "Madame",
+      "Monsieur": "Monsieur",
+      "Mademoiselle": "Mademoiselle"
+    }
+  }
+}
