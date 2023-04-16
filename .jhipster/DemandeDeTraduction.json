@@ -1,0 +1,103 @@
+{
+  "applications": "*",
+  "changelogDate": "20230416123504",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "demande_de_traduction",
+  "fields": [
+    {
+      "fieldName": "modeEnvoiPreconise",
+      "fieldType": "ModeEnvoi",
+      "fieldValues": "COURRIERPOSTAL,EMAIL"
+    },
+    {
+      "fieldName": "modeLivraisonExige",
+      "fieldType": "ModeLivraison",
+      "fieldValues": "COURRIERPOSTAL,EMAIL,REMISEENMAINSPROPRES"
+    },
+    {
+      "fieldName": "delaiDeTraitemenSouhaite",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "adresseLivraison",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "150"
+    },
+    {
+      "fieldName": "delaiDeTraitemenPrestataire",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "observation",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "dateCreation",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "dateCloture",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "etat",
+      "fieldType": "EtatDemande",
+      "fieldValues": "Initiee,Devis,DevisAccepte,DevisRejete,Payee,EncoursTratitement,Annulee,Close"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "DemandeDeTraduction",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "documentATraduire",
+      "otherEntityRelationshipName": "demandeTraductions",
+      "relationshipName": "traductions",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "pieceJointe",
+      "otherEntityRelationshipName": "pjDdeTraductions",
+      "relationshipName": "traductionsPj",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "prestataire",
+      "otherEntityRelationshipName": "prestaDdeTraductions",
+      "relationshipName": "traductionsPresta",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "devis",
+      "otherEntityRelationshipName": "demandeDeTraduction",
+      "relationshipName": "devis",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "commentaire",
+      "otherEntityRelationshipName": "demandeDeTraduction",
+      "relationshipName": "commentaire",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "nom",
+      "otherEntityName": "ville",
+      "relationshipName": "ville",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "nom",
+      "otherEntityName": "demandeur",
+      "otherEntityRelationshipName": "demandes",
+      "relationshipName": "demandeurService",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

@@ -1,0 +1,59 @@
+{
+  "applications": "*",
+  "changelogDate": "20230416123505",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "document_a_traduire",
+  "fields": [
+    {
+      "fieldName": "nombreDePagesATraduire",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "mentionTraitementParticulier",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "remarques",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "DocumentATraduire",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "langue",
+      "otherEntityRelationshipName": "docTraductions",
+      "relationshipName": "documens",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "nomLangue",
+      "otherEntityName": "langue",
+      "relationshipName": "langueDestination",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "typeDocument",
+      "otherEntityName": "natureDocumentATraduire",
+      "relationshipName": "typeDocument",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "delaiDeTraitemenSouhaite",
+      "otherEntityName": "demandeDeTraduction",
+      "otherEntityRelationshipName": "traductions",
+      "relationshipName": "demandeTraductions",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

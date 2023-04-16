@@ -1,0 +1,9 @@
+{
+  "jhipsterSampleApplicationApp": {
+    "EtatPrestataire": {
+      "null": "",
+      "Actif": "Actif",
+      "Inactif": "Inactif"
+    }
+  }
+}

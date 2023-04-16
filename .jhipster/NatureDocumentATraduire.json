@@ -1,0 +1,24 @@
+{
+  "applications": "*",
+  "changelogDate": "20230416123508",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "nature_document_a_traduire",
+  "fields": [
+    {
+      "fieldName": "codeType",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "typeDocument",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "NatureDocumentATraduire",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceClass"
+}

@@ -1,0 +1,147 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-notation-heading"
+        data-cy="NotationCreateUpdateHeading"
+        jhiTranslate="jhipsterSampleApplicationApp.notation.home.createOrEditLabel"
+      >
+        Créer ou éditer un Notation
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.notation.notetation" for="field_notetation"
+            >Notetation</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="notetation"
+            id="field_notetation"
+            data-cy="notetation"
+            formControlName="notetation"
+          />
+          <div *ngIf="editForm.get('notetation')!.invalid && (editForm.get('notetation')!.dirty || editForm.get('notetation')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('notetation')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              Ce champ est obligatoire.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('notetation')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              Ce champ doit être un nombre.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.notation.commentaire" for="field_commentaire"
+            >Commentaire</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="commentaire"
+            id="field_commentaire"
+            data-cy="commentaire"
+            formControlName="commentaire"
+          />
+          <div *ngIf="editForm.get('commentaire')!.invalid && (editForm.get('commentaire')!.dirty || editForm.get('commentaire')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('commentaire')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 150 }"
+            >
+              Ce champ doit faire moins de 150 caractères.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.notation.dateCreation" for="field_dateCreation"
+            >Date Creation</label
+          >
+          <div class="input-group">
+            <input
+              id="field_dateCreation"
+              data-cy="dateCreation"
+              type="text"
+              class="form-control"
+              name="dateCreation"
+              ngbDatepicker
+              #dateCreationDp="ngbDatepicker"
+              formControlName="dateCreation"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateCreationDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.notation.demandeur" for="field_demandeur">Demandeur</label>
+          <select
+            class="form-control"
+            id="field_demandeur"
+            data-cy="demandeur"
+            name="demandeur"
+            formControlName="demandeur"
+            [compareWith]="compareDemandeur"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="demandeurOption" *ngFor="let demandeurOption of demandeursSharedCollection">{{ demandeurOption.id }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterSampleApplicationApp.notation.prestataire" for="field_prestataire"
+            >Prestataire</label
+          >
+          <select
+            class="form-control"
+            id="field_prestataire"
+            data-cy="prestataire"
+            name="prestataire"
+            formControlName="prestataire"
+            [compareWith]="comparePrestataire"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="prestataireOption" *ngFor="let prestataireOption of prestatairesSharedCollection">
+              {{ prestataireOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

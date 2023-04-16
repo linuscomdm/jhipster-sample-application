@@ -1,0 +1,10 @@
+{
+  "jhipsterSampleApplicationApp": {
+    "FormatDocTraduit": {
+      "null": "",
+      "PDF": "PDF",
+      "PNG": "PNG",
+      "JPEG": "JPEG"
+    }
+  }
+}

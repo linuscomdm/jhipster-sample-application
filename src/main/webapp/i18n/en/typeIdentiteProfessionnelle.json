@@ -1,0 +1,9 @@
+{
+  "jhipsterSampleApplicationApp": {
+    "TypeIdentiteProfessionnelle": {
+      "null": "",
+      "MATRIULEFISCAL": "MATRIULEFISCAL",
+      "CARTEPROFESSIONNEL": "CARTEPROFESSIONNEL"
+    }
+  }
+}

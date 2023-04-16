@@ -1,0 +1,28 @@
+{
+  "jhipsterSampleApplicationApp": {
+    "notation": {
+      "home": {
+        "title": "Notations",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Notation",
+        "createOrEditLabel": "Créer ou éditer un Notation",
+        "notFound": "Aucun Notation trouvé"
+      },
+      "created": "Un nouveau Notation a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Notation avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Notation avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Notation {{ id }} ?"
+      },
+      "detail": {
+        "title": "Notation"
+      },
+      "id": "ID",
+      "notetation": "Notetation",
+      "commentaire": "Commentaire",
+      "dateCreation": "Date Creation",
+      "demandeur": "Demandeur",
+      "prestataire": "Prestataire"
+    }
+  }
+}

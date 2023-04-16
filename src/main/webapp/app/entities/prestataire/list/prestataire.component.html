@@ -1,0 +1,312 @@
+<div>
+  <h2 id="page-heading" data-cy="PrestataireHeading">
+    <span jhiTranslate="jhipsterSampleApplicationApp.prestataire.home.title">Prestataires</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="jhipsterSampleApplicationApp.prestataire.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-prestataire"
+        [routerLink]="['/prestataire/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="jhipsterSampleApplicationApp.prestataire.home.createLabel"> Créer un nouveau Prestataire </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="prestataires?.length === 0">
+    <span jhiTranslate="jhipsterSampleApplicationApp.prestataire.home.notFound">Aucun Prestataire trouvé</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="prestataires && prestataires.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="civilite">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.prestataire.civilite">Civilite</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="nom">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.prestataire.nom">Nom</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="prenom">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.prestataire.prenom">Prenom</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="nomCommercial">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.prestataire.nomCommercial">Nom Commercial</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="telephoneTravail">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.prestataire.telephoneTravail">Telephone Travail</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="telephoneMobile">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.prestataire.telephoneMobile">Telephone Mobile</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="email">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.prestataire.email">Email</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="adresse">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.prestataire.adresse">Adresse</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="codePostal">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.prestataire.codePostal">Code Postal</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="photoDeProfil">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.prestataire.photoDeProfil">Photo De Profil</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="numeroPieceIdentite">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.prestataire.numeroPieceIdentite">Numero Piece Identite</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="typeIdentiteProfessionnelle">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.prestataire.typeIdentiteProfessionnelle">Type Identite Professionnelle</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="rattachIdentitePro">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.prestataire.rattachIdentitePro">Rattach Identite Pro</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="coordonneesBancaires">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.prestataire.coordonneesBancaires">Coordonnees Bancaires</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="titulaireDuCompte">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.prestataire.titulaireDuCompte">Titulaire Du Compte</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="ribOuRip">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.prestataire.ribOuRip">Rib Ou Rip</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="dateCreation">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.prestataire.dateCreation">Date Creation</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="etat">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.prestataire.etat">Etat</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="user.login">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.prestataire.user">User</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="banque.libelle">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.prestataire.banque">Banque</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="ville.nom">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.prestataire.ville">Ville</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="prestaDdeTraductions.delaiDeTraitemenSouhaite">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.prestataire.prestaDdeTraductions">Presta Dde Traductions</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="agenceBanque.id">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.prestataire.agenceBanque">Agence Banque</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let prestataire of prestataires; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/prestataire', prestataire.id, 'view']">{{ prestataire.id }}</a>
+          </td>
+          <td jhiTranslate="{{ 'jhipsterSampleApplicationApp.Civilite.' + prestataire.civilite }}">{{ prestataire.civilite }}</td>
+          <td>{{ prestataire.nom }}</td>
+          <td>{{ prestataire.prenom }}</td>
+          <td>{{ prestataire.nomCommercial }}</td>
+          <td>{{ prestataire.telephoneTravail }}</td>
+          <td>{{ prestataire.telephoneMobile }}</td>
+          <td>{{ prestataire.email }}</td>
+          <td>{{ prestataire.adresse }}</td>
+          <td>{{ prestataire.codePostal }}</td>
+          <td>
+            <a
+              *ngIf="prestataire.photoDeProfil"
+              (click)="openFile(prestataire.photoDeProfil, prestataire.photoDeProfilContentType)"
+              jhiTranslate="entity.action.open"
+              >Ouvrir</a
+            >
+            <span *ngIf="prestataire.photoDeProfil"
+              >{{ prestataire.photoDeProfilContentType }}, {{ byteSize(prestataire.photoDeProfil) }}</span
+            >
+          </td>
+          <td>{{ prestataire.numeroPieceIdentite }}</td>
+          <td jhiTranslate="{{ 'jhipsterSampleApplicationApp.TypeIdentiteProfessionnelle.' + prestataire.typeIdentiteProfessionnelle }}">
+            {{ prestataire.typeIdentiteProfessionnelle }}
+          </td>
+          <td>
+            <a
+              *ngIf="prestataire.rattachIdentitePro"
+              (click)="openFile(prestataire.rattachIdentitePro, prestataire.rattachIdentiteProContentType)"
+              jhiTranslate="entity.action.open"
+              >Ouvrir</a
+            >
+            <span *ngIf="prestataire.rattachIdentitePro"
+              >{{ prestataire.rattachIdentiteProContentType }}, {{ byteSize(prestataire.rattachIdentitePro) }}</span
+            >
+          </td>
+          <td>
+            <a
+              *ngIf="prestataire.coordonneesBancaires"
+              (click)="openFile(prestataire.coordonneesBancaires, prestataire.coordonneesBancairesContentType)"
+              jhiTranslate="entity.action.open"
+              >Ouvrir</a
+            >
+            <span *ngIf="prestataire.coordonneesBancaires"
+              >{{ prestataire.coordonneesBancairesContentType }}, {{ byteSize(prestataire.coordonneesBancaires) }}</span
+            >
+          </td>
+          <td>{{ prestataire.titulaireDuCompte }}</td>
+          <td>{{ prestataire.ribOuRip }}</td>
+          <td>{{ prestataire.dateCreation | formatMediumDate }}</td>
+          <td jhiTranslate="{{ 'jhipsterSampleApplicationApp.EtatPrestataire.' + prestataire.etat }}">{{ prestataire.etat }}</td>
+          <td>
+            {{ prestataire.user?.login }}
+          </td>
+          <td>
+            <div *ngIf="prestataire.banque">
+              <a [routerLink]="['/banque', prestataire.banque.id, 'view']">{{ prestataire.banque.libelle }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="prestataire.ville">
+              <a [routerLink]="['/ville', prestataire.ville.id, 'view']">{{ prestataire.ville.nom }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="prestataire.prestaDdeTraductions">
+              <a [routerLink]="['/demande-de-traduction', prestataire.prestaDdeTraductions.id, 'view']">{{
+                prestataire.prestaDdeTraductions.delaiDeTraitemenSouhaite
+              }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="prestataire.agenceBanque">
+              <a [routerLink]="['/agence-banque', prestataire.agenceBanque.id, 'view']">{{ prestataire.agenceBanque.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/prestataire', prestataire.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/prestataire', prestataire.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+              </button>
+
+              <button type="submit" (click)="delete(prestataire)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="prestataires && prestataires.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

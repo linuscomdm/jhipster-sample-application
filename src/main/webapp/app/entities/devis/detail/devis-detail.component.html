@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="devis">
+      <h2 data-cy="devisDetailsHeading"><span jhiTranslate="jhipsterSampleApplicationApp.devis.detail.title">Devis</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ devis.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.devis.numero">Numero</span></dt>
+        <dd>
+          <span>{{ devis.numero }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.devis.date">Date</span></dt>
+        <dd>
+          <span>{{ devis.date | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.devis.prixTotal">Prix Total</span></dt>
+        <dd>
+          <span>{{ devis.prixTotal }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.devis.etat">Etat</span></dt>
+        <dd>
+          <span>{{ devis.etat }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.devis.prestataire">Prestataire</span></dt>
+        <dd>
+          <div *ngIf="devis.prestataire">
+            <a [routerLink]="['/prestataire', devis.prestataire.id, 'view']">{{ devis.prestataire.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.devis.demandeDeTraduction">Demande De Traduction</span></dt>
+        <dd>
+          <div *ngIf="devis.demandeDeTraduction">
+            <a [routerLink]="['/demande-de-traduction', devis.demandeDeTraduction.id, 'view']">{{ devis.demandeDeTraduction.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/devis', devis.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+      </button>
+    </div>
+  </div>
+</div>

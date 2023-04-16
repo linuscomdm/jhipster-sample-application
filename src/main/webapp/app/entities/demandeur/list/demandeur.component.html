@@ -1,0 +1,204 @@
+<div>
+  <h2 id="page-heading" data-cy="DemandeurHeading">
+    <span jhiTranslate="jhipsterSampleApplicationApp.demandeur.home.title">Demandeurs</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="jhipsterSampleApplicationApp.demandeur.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-demandeur"
+        [routerLink]="['/demandeur/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="jhipsterSampleApplicationApp.demandeur.home.createLabel"> Créer un nouveau Demandeur </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="demandeurs?.length === 0">
+    <span jhiTranslate="jhipsterSampleApplicationApp.demandeur.home.notFound">Aucun Demandeur trouvé</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="demandeurs && demandeurs.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="civilite">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.demandeur.civilite">Civilite</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="nom">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.demandeur.nom">Nom</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="prenom">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.demandeur.prenom">Prenom</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="dateDeNaissance">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.demandeur.dateDeNaissance">Date De Naissance</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="telephone">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.demandeur.telephone">Telephone</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="email">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.demandeur.email">Email</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="adresse">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.demandeur.adresse">Adresse</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="dateCreation">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.demandeur.dateCreation">Date Creation</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="etat">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.demandeur.etat">Etat</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="user.login">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.demandeur.user">User</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="ville.nom">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.demandeur.ville">Ville</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="banque.libelle">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.demandeur.banque">Banque</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="agenceBanque.id">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterSampleApplicationApp.demandeur.agenceBanque">Agence Banque</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let demandeur of demandeurs; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/demandeur', demandeur.id, 'view']">{{ demandeur.id }}</a>
+          </td>
+          <td jhiTranslate="{{ 'jhipsterSampleApplicationApp.Civilite.' + demandeur.civilite }}">{{ demandeur.civilite }}</td>
+          <td>{{ demandeur.nom }}</td>
+          <td>{{ demandeur.prenom }}</td>
+          <td>{{ demandeur.dateDeNaissance | formatMediumDate }}</td>
+          <td>{{ demandeur.telephone }}</td>
+          <td>{{ demandeur.email }}</td>
+          <td>{{ demandeur.adresse }}</td>
+          <td>{{ demandeur.dateCreation | formatMediumDate }}</td>
+          <td jhiTranslate="{{ 'jhipsterSampleApplicationApp.EtatDemandeur.' + demandeur.etat }}">{{ demandeur.etat }}</td>
+          <td>
+            {{ demandeur.user?.login }}
+          </td>
+          <td>
+            <div *ngIf="demandeur.ville">
+              <a [routerLink]="['/ville', demandeur.ville.id, 'view']">{{ demandeur.ville.nom }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="demandeur.banque">
+              <a [routerLink]="['/banque', demandeur.banque.id, 'view']">{{ demandeur.banque.libelle }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="demandeur.agenceBanque">
+              <a [routerLink]="['/agence-banque', demandeur.agenceBanque.id, 'view']">{{ demandeur.agenceBanque.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/demandeur', demandeur.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/demandeur', demandeur.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+              </button>
+
+              <button type="submit" (click)="delete(demandeur)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="demandeurs && demandeurs.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

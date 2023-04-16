@@ -1,0 +1,86 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="demandeur">
+      <h2 data-cy="demandeurDetailsHeading"><span jhiTranslate="jhipsterSampleApplicationApp.demandeur.detail.title">Demandeur</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ demandeur.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.demandeur.civilite">Civilite</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'jhipsterSampleApplicationApp.Civilite.' + demandeur.civilite }}">{{ demandeur.civilite }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.demandeur.nom">Nom</span></dt>
+        <dd>
+          <span>{{ demandeur.nom }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.demandeur.prenom">Prenom</span></dt>
+        <dd>
+          <span>{{ demandeur.prenom }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.demandeur.dateDeNaissance">Date De Naissance</span></dt>
+        <dd>
+          <span>{{ demandeur.dateDeNaissance | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.demandeur.telephone">Telephone</span></dt>
+        <dd>
+          <span>{{ demandeur.telephone }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.demandeur.email">Email</span></dt>
+        <dd>
+          <span>{{ demandeur.email }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.demandeur.adresse">Adresse</span></dt>
+        <dd>
+          <span>{{ demandeur.adresse }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.demandeur.dateCreation">Date Creation</span></dt>
+        <dd>
+          <span>{{ demandeur.dateCreation | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.demandeur.etat">Etat</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'jhipsterSampleApplicationApp.EtatDemandeur.' + demandeur.etat }}">{{ demandeur.etat }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.demandeur.user">User</span></dt>
+        <dd>
+          <span>{{ demandeur.user?.login }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.demandeur.ville">Ville</span></dt>
+        <dd>
+          <div *ngIf="demandeur.ville">
+            <a [routerLink]="['/ville', demandeur.ville.id, 'view']">{{ demandeur.ville.nom }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.demandeur.banque">Banque</span></dt>
+        <dd>
+          <div *ngIf="demandeur.banque">
+            <a [routerLink]="['/banque', demandeur.banque.id, 'view']">{{ demandeur.banque.libelle }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="jhipsterSampleApplicationApp.demandeur.agenceBanque">Agence Banque</span></dt>
+        <dd>
+          <div *ngIf="demandeur.agenceBanque">
+            <a [routerLink]="['/agence-banque', demandeur.agenceBanque.id, 'view']">{{ demandeur.agenceBanque.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/demandeur', demandeur.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+      </button>
+    </div>
+  </div>
+</div>

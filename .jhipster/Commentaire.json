@@ -1,0 +1,39 @@
+{
+  "applications": "*",
+  "changelogDate": "20230416123517",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "commentaire",
+  "fields": [
+    {
+      "fieldName": "texte",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Commentaire",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "demandeDeTraduction",
+      "otherEntityRelationshipName": "commentaire",
+      "relationshipName": "demandeDeTraduction",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "prestataire",
+      "otherEntityRelationshipName": "commentaire",
+      "relationshipName": "prestataire",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "demandeur",
+      "otherEntityRelationshipName": "commentaire",
+      "relationshipName": "demandeur",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}
